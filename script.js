@@ -61,15 +61,17 @@ function displayPrice() {
     }
 }
 
-// Show/hide fixed price field based on selection
+// Toggle fixed price input and disable miles based on service type
 function ifFixedPrice() {
-    document.getElementById('serviceType').addEventListener('change', function () {
-        const serviceType = this.value;
-        const fixedInput = document.getElementById('fixedPrice');
-        const fixedLabel = document.getElementById('fixedPriceLabel');
-        const milesInput = document.getElementById('miles');
+    const serviceTypeSelect = document.getElementById('serviceType');
+    const fixedInput = document.getElementById('fixedPrice');
+    const fixedLabel = document.getElementById('fixedPriceLabel');
+    const milesInput = document.getElementById('miles');
 
-        if (serviceType === 'fixed') {
+    serviceTypeSelect.addEventListener('change', function () {
+        const selectedType = this.value;
+
+        if (selectedType === 'fixed') {
             fixedInput.style.display = 'inline-block';
             fixedLabel.style.display = 'inline-block';
             milesInput.disabled = true;
@@ -120,11 +122,11 @@ function toggleReturnRide() {
             section.style.display = 'block';
 
             //Auto-fill return ride fields
-            const destination = document.getElementById('destinationAddress').value;
             const pickup = document.getElementById('patientAddress').value;
+            const destination = document.getElementById('destinationAddress').value;
 
-            document.getElementById('returnDestinationAddress').value = destination;
-            document.getElementById('returnRidePickUpAddress').value = pickup;
+            document.getElementById('returnRidePickUpAddress').value = destination;
+            document.getElementById('returnDestinationAddress').value = pickup;
             
         } else {
             section.style.display = 'none';

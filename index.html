@@ -51,8 +51,10 @@
         <input id="aptTime" type="time" step="60" placeholder="Appointment Time"><br>
         <label for="specialInstructions">Special Instructions:</label>
         <textarea id="specialInstructions" placeholder="Enter Special Instructions"></textarea><br>
-        <label for="HasAReturnRide">Has a Return Ride:</label>
-        <input type="checkbox" id="HasAReturnRide" name="HasAReturnRide"><br>
+        <div class="return-ride-checkbox">
+            <label for="HasAReturnRide">Has a Return Ride:</label>
+            <input type="checkbox" id="HasAReturnRide" name="HasAReturnRide">
+        </div>
         <div id="returnRideSection" style="display: none;">
             <label for="returnPickUpTime">Return Pick Up Time:</label>
             <input id="returnPickUpTime" type="time" step="60" placeholder="Return Pick Up Time"><br>
