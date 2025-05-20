@@ -44,17 +44,25 @@
         <label for="patientAddress">Pick Up Address:</label>
         <textarea id="patientAddress" placeholder="Enter Patient's Pick Up Address"></textarea><br>
         <label for="pickUpTime">Pick Up Time:</label>
-        <input id="pickUpTime" type="time" placeholder="Pick Up Time"><br>
+        <input id="pickUpTime" type="time" step="60" placeholder="Pick Up Time"><br>
         <label for="destinationAddress">Destination Address:</label>
         <textarea id="destinationAddress" placeholder="Enter Destination Address"></textarea><br>
         <label for="aptTime">Appointment Time:</label>
-        <input id="aptTime" type="time" placeholder="Appointment Time"><br>
+        <input id="aptTime" type="time" step="60" placeholder="Appointment Time"><br>
         <label for="specialInstructions">Special Instructions:</label>
         <textarea id="specialInstructions" placeholder="Enter Special Instructions"></textarea><br>
-        <label for="returnRide">Return Ride:</label>
-        <input id="returnRide" type="time" placeholder="Return Ride Time">
+        <label for="HasAReturnRide">Has a Return Ride:</label>
+        <input type="checkbox" id="HasAReturnRide" name="HasAReturnRide"><br>
+        <div id="returnRideSection" style="display: none;">
+            <label for="returnPickUpTime">Return Pick Up Time:</label>
+            <input id="returnPickUpTime" type="time" step="60" placeholder="Return Pick Up Time"><br>
+            <label for="returnRidePickUpAddress">Return Pick Up Address:</label>
+            <textarea id="returnRidePickUpAddress" placeholder="Enter Return Pick Up Address"></textarea><br>
+            <label for="returnDestinationAddress">Return Destination Address:</label>
+            <textarea id="returnDestinationAddress" placeholder="Enter Return Destination Address"></textarea><br>
+        </div>
     </form>
-    
+
     <h1>Price Calculator</h1>
     <form onsubmit="event.preventDefault(); displayPrice();">
         <label for="serviceType">Service Type:</label>

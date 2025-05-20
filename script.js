@@ -110,6 +110,30 @@ function syncRunTypeWithServiceType() {
     runType.addEventListener('change', updateServiceType);
 }
 
+// Toggle return ride section based on checkbox state
+function toggleReturnRide() {
+    const checkbox = document.getElementById('HasAReturnRide');
+    const section = document.getElementById('returnRideSection');
+
+    checkbox.addEventListener('change', function () {
+        if (this.checked) {
+            section.style.display = 'block';
+
+            //Auto-fill return ride fields
+            const destination = document.getElementById('destinationAddress').value;
+            const pickup = document.getElementById('patientAddress').value;
+
+            document.getElementById('returnDestinationAddress').value = destination;
+            document.getElementById('returnRidePickUpAddress').value = pickup;
+            
+        } else {
+            section.style.display = 'none';
+        }
+    });
+}
+
+
+
 // Print page
 function printPage() {
     window.print();
@@ -119,4 +143,5 @@ function printPage() {
 document.addEventListener('DOMContentLoaded', function () {
     ifFixedPrice();
     syncRunTypeWithServiceType();
+    toggleReturnRide();
 });
