@@ -56,12 +56,6 @@ A lightweight web application built with **HTML**, **CSS**, and **JavaScript** f
 
 ---
 
-## 🖼️ Preview
-
-![Preview Screenshot](preview.png)
-
----
-
 ## 📄 License
 
 This project is provided "as is" without warranty.  
