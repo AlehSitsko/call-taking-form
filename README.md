@@ -1,62 +1,81 @@
-# 🚑 Call Taking Form and Price Calculator
+Call Taking Form and Price Calculator
 
-A lightweight web application built with **HTML**, **CSS**, and **JavaScript** for collecting and managing patient transport information and calculating service pricing based on selected options.
+A modular HTML/JavaScript web application for managing ambulance call-taking, calculating service prices, and optionally collecting patient data. Designed for internal dispatch/logistics usage.
 
----
+🔧 Features
 
-## ✨ Features
+Patient info form
 
-- 📞 Caller type and name input  
-- 🧍 Patient and transport information collection  
-- 📝 Run Type selection (BLS, ALS, Emergency, Private Transfer, etc.)  
-- 📊 Service Type and mileage-based or fixed price calculation  
-- 🔁 Return Ride support (with address auto-fill)  
-- ⏱️ Appointment and pickup times with `<input type="time">`  
-- 🖨️ Print-friendly form output  
+Run and service type selection
 
----
+Return ride section with auto-filled reverse addresses
 
-## 🚧 Planned Improvements
+Fixed price and mileage-based calculations
 
-- 🔄 Round-trip total cost output  
-- 📞 Will Call checkbox (for unknown return pickup times)  
-- ⏹️ Optional validation  
-- 📋 Save/export to PDF or database (future)
+Print-friendly layout
 
----
+Modular JS structure for UI, pricing, form logic, and future patient data handling
 
-## 📌 Changelog (May 20, 2025)
+🗂 Folder Structure
 
-- ✅ Redesigned and styled **Return Ride** checkbox (larger, highlighted, aligned with form width)  
-- ✅ Automatically **duplicates addresses** for return trip upon checkbox selection  
-- ✅ Prevents duplication of `Has a Return Ride:` label  
-- ✅ Improved responsive layout  
-- ✅ Structured project for upcoming round-trip calculation and “Will Call” feature  
-- ✅ Cleaned up HTML and CSS structure  
+CallTakingForm/
+├── css/
+│   └── style.css
+├── js/
+│   ├── form.js          # Form handling (future logic)
+│   ├── main.js          # Initialization entry point
+│   ├── patient.js       # Placeholder for patient DB logic
+│   ├── pricing.js       # Price calculation logic
+│   └── ui.js            # UI behavior (toggles, syncing)
+├── index.html
+└── README.md
 
----
+🚀 Getting Started
 
-## 🚀 Usage
+Just open index.html in your browser. No backend or database is currently connected.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/AlehSitsko/call-taking-form.git
-   cd call-taking-form
-   ```
+📝 Changelog
 
-2. Open `index.html` in your browser, or use Live Server extension in VS Code.
+[May 21, 2025]
 
----
+Major Refactor
 
-## 🛠 Tech Stack
+✅ Modularized JavaScript: separated logic into ui.js, pricing.js, form.js, patient.js, and main.js
 
-- HTML5  
-- CSS3  
-- Vanilla JavaScript (ES6)
+✅ Improved form logic:
 
----
+Service type synced with run type
 
-## 📄 License
+Dynamic handling of fixed price fields
 
+Auto-filled reverse address logic
+
+✅ Visual improvements:
+
+Return ride checkbox now styled and better positioned
+
+Form spacing and layout unified
+
+✅ Restored style.css after accidental deletion
+
+🔮 Planned Features
+
+A. Pricing Enhancements
+
+
+
+B. Patient Data Module
+
+
+
+C. Codebase Improvements
+
+
+
+This project is actively evolving. Contributions, suggestions, and reviews are welcome.
 This project is provided "as is" without warranty.  
 Feel free to use or modify it for personal or educational use.
+
+Built with pragmatism by Aleh Sitsko
+
+
