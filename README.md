@@ -72,10 +72,10 @@ C. Codebase Improvements
 
 
 
+D. Visual Polishing
+
+
+
 This project is actively evolving. Contributions, suggestions, and reviews are welcome.
-This project is provided "as is" without warranty.  
-Feel free to use or modify it for personal or educational use.
 
 Built with pragmatism by Aleh Sitsko
-
-
