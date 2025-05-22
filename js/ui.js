@@ -58,9 +58,21 @@ function toggleReturnRide() {
 
             document.getElementById('returnRidePickUpAddress').value = destination;
             document.getElementById('returnDestinationAddress').value = pickup;
+
+            // Will Call logic (safe only if element exists now)
+            const willCallCheckbox = document.getElementById('isWillCall');
+            const returnTimeField = document.getElementById('returnPickUpTime');
+
+            if (willCallCheckbox && returnTimeField) {
+                willCallCheckbox.addEventListener('change', function () {
+                    returnTimeField.disabled = this.checked;
+                    returnTimeField.style.opacity = this.checked ? '0.5' : '1';
+                });
+            }
         }
     });
 }
+
 
 // Print the entire page
 function printPage() {

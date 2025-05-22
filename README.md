@@ -10,6 +10,8 @@ Run and service type selection
 
 Return ride section with auto-filled reverse addresses
 
+"Will Call" logic for uncertain return times
+
 Fixed price and mileage-based calculations
 
 Print-friendly layout
@@ -36,27 +38,27 @@ Just open index.html in your browser. No backend or database is currently connec
 
 📝 Changelog
 
-[May 21, 2025]
+[May 21–22, 2025]
 
-Major Refactor
+✅ Major Feature: Return Ride Logic
 
-✅ Modularized JavaScript: separated logic into ui.js, pricing.js, form.js, patient.js, and main.js
+Show/hide return fields with checkbox
 
-✅ Improved form logic:
+Auto-fill reverse address values
 
-Service type synced with run type
+Add "Will Call" option to disable return time field
 
-Dynamic handling of fixed price fields
+Styled and aligned return ride checkbox
 
-Auto-filled reverse address logic
+🔧 Refactoring & UI
 
-✅ Visual improvements:
+Modular split of JS files finalized
 
-Return ride checkbox now styled and better positioned
+Left/Right pane layout introduced
 
-Form spacing and layout unified
+Informational block added to right pane
 
-✅ Restored style.css after accidental deletion
+Codebase organized and verified
 
 🔮 Planned Features
 
@@ -72,7 +74,8 @@ C. Codebase Improvements
 
 
 
-D. Visual Polishing
+D. Visual and UX
+
 
 
 

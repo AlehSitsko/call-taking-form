@@ -8,54 +8,60 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Call Taking Form</h1>
-    <form onsubmit="event.preventDefault();">
-        <label for="callerType">Caller Type:</label>
-        <select id="callerType" name="callerType">
-            <option value="mtm">MTM</option>
-            <option value="cts">CTS</option>
-            <option value="statesman">Statesman</option>
-            <option value="horsham">Horsham</option>
-            <option value="private">Private</option>
-        </select><br><br>
-        <input id="callerName" type="text" placeholder="Enter caller's name">
-    </form>
+  <main class="layout">
+    <section class="left-pane">
+          <h1>Call Taking Form</h1>
+            <form onsubmit="event.preventDefault();">
+                <label for="callerType">Caller Type:</label>
+                    <select id="callerType" name="callerType">
+                        <option value="mtm">MTM</option>
+                        <option value="cts">CTS</option>
+                        <option value="statesman">Statesman</option>
+                        <option value="horsham">Horsham</option>
+                        <option value="private">Private</option>
+                    </select><br><br>
+                <input id="callerName" type="text" placeholder="Enter caller's name">
+            </form>
     
-    <form id="runTypeForm">
-        <label for="runType">Run Type:</label>
-        <select name="runType" id="runType">
-            <option value="bls">BLS</option>
-            <option value="bls4">BLS4</option>
-            <option value="bls6">BLS6</option>
-            <option value="als">ALS</option>
-            <option value="emergency">Emergency</option>
-            <option value="privateTransfer">Private Transfer</option>
-            <option value="fixed">Fixed Price</option>
-        </select>
-    </form>
+            <form id="runTypeForm">
+                <label for="runType">Run Type:</label>
+                    <select name="runType" id="runType">
+                        <option value="bls">BLS</option>
+                        <option value="bls4">BLS4</option>
+                        <option value="bls6">BLS6</option>
+                        <option value="als">ALS</option>
+                        <option value="emergency">Emergency</option>
+                        <option value="privateTransfer">Private Transfer</option>
+                        <option value="fixed">Fixed Price</option>
+                    </select>
+            </form>
     
-    <form id="patientInfoForm">
-        <label for="namePt">Patient's Name:</label>
-        <textarea id="namePt" placeholder="Enter Patient's Name"></textarea><br>
-        <label for="lastNamePT">Patient's Last Name:</label>
-        <textarea id="lastNamePT" placeholder="Enter Patient's Last Name"></textarea><br>
-        <label for="patientDOB">Patient's DOB:</label>
-        <input id="patientDOB" type="date" placeholder="Enter Patient's DOB"><br>
-        <label for="patientAddress">Pick Up Address:</label>
-        <textarea id="patientAddress" placeholder="Enter Patient's Pick Up Address"></textarea><br>
-        <label for="pickUpTime">Pick Up Time:</label>
-        <input id="pickUpTime" type="time" step="60" placeholder="Pick Up Time"><br>
-        <label for="destinationAddress">Destination Address:</label>
-        <textarea id="destinationAddress" placeholder="Enter Destination Address"></textarea><br>
-        <label for="aptTime">Appointment Time:</label>
-        <input id="aptTime" type="time" step="60" placeholder="Appointment Time"><br>
-        <label for="specialInstructions">Special Instructions:</label>
-        <textarea id="specialInstructions" placeholder="Enter Special Instructions"></textarea><br>
-        <div class="return-ride-checkbox">
-            <label for="HasAReturnRide">Has a Return Ride:</label>
-            <input type="checkbox" id="HasAReturnRide" name="HasAReturnRide">
-        </div>
+            <form id="patientInfoForm">
+                <label for="namePt">Patient's Name:</label>
+                <textarea id="namePt" placeholder="Enter Patient's Name"></textarea><br>
+                <label for="lastNamePT">Patient's Last Name:</label>
+                <textarea id="lastNamePT" placeholder="Enter Patient's Last Name"></textarea><br>
+                <label for="patientDOB">Patient's DOB:</label>
+                <input id="patientDOB" type="date" placeholder="Enter Patient's DOB"><br>
+                <label for="patientAddress">Pick Up Address:</label>
+                <textarea id="patientAddress" placeholder="Enter Patient's Pick Up Address"></textarea><br>
+                <label for="pickUpTime">Pick Up Time:</label>
+                <input id="pickUpTime" type="time" step="60" placeholder="Pick Up Time"><br>
+                <label for="destinationAddress">Destination Address:</label>
+                <textarea id="destinationAddress" placeholder="Enter Destination Address"></textarea><br>
+                <label for="aptTime">Appointment Time:</label>
+                <input id="aptTime" type="time" step="60" placeholder="Appointment Time"><br>
+                <label for="specialInstructions">Special Instructions:</label>
+                <textarea id="specialInstructions" placeholder="Enter Special Instructions"></textarea><br>
+                <div class="return-ride-checkbox">
+                <label for="HasAReturnRide">Has a Return Ride:</label>
+                <input type="checkbox" id="HasAReturnRide" name="HasAReturnRide">
+            </div>
         <div id="returnRideSection" style="display: none;">
+            <div class="will-call-checkbox">
+                <input type="checkbox" id="isWillCall">
+                <label for="isWillCall">Will Call (Return time to be determined later)</label>
+            </div>
             <label for="returnPickUpTime">Return Pick Up Time:</label>
             <input id="returnPickUpTime" type="time" step="60" placeholder="Return Pick Up Time"><br>
             <label for="returnRidePickUpAddress">Return Pick Up Address:</label>
@@ -63,33 +69,60 @@
             <label for="returnDestinationAddress">Return Destination Address:</label>
             <textarea id="returnDestinationAddress" placeholder="Enter Return Destination Address"></textarea><br>
         </div>
-    </form>
+        </form>
 
-    <h1>Price Calculator</h1>
-    <form id="priceCalculatorForm">
-        <label for="serviceType">Service Type:</label>
-        <select id="serviceType" name="serviceType">
-            <option value="bls">BLS</option>
-            <option value="bls3">BLS3</option>
-            <option value="bls4">BLS4</option>
-            <option value="bls6">BLS6</option>
-            <option value="als">ALS</option>
-            <option value="fixed">Fixed Price</option>
-        </select><br><br>
+            <h1>Price Calculator</h1>
+            <form id="priceCalculatorForm">
+                <label for="serviceType">Service Type:</label>
+                <select id="serviceType" name="serviceType">
+                    <option value="bls">BLS</option>
+                    <option value="bls3">BLS3</option>
+                    <option value="bls4">BLS4</option>
+                    <option value="bls6">BLS6</option>
+                    <option value="als">ALS</option>
+                    <option value="fixed">Fixed Price</option>
+                </select><br><br>
 
-        <label for="miles">Miles:</label>
-        <input type="number" id="miles" name="miles" step="0.1"><br><br>
+                <label for="miles">Miles:</label>
+                <input type="number" id="miles" name="miles" step="0.1"><br><br>
 
-        <button type="submit">Calculate Price</button><br>
+                <button type="submit">Calculate Price</button><br>
 
-        <label for="fixedPrice" id="fixedPriceLabel" style="display: none;">Enter Fixed Price:</label>
-        <input type="number" id="fixedPrice" name="fixedPrice" style="display: none;">
-    </form>
+                <label for="fixedPrice" id="fixedPriceLabel" style="display: none;">Enter Fixed Price:</label>
+                <input type="number" id="fixedPrice" name="fixedPrice" style="display: none;">
+        </form>
     
-    <p id="result"></p>
+            <p id="result"></p>
     
-    <button onclick="printPage()">Print</button>
-</body>
+            <button onclick="printPage()">Print</button>
+            </section>
+            <section class="right-pane">
+                    <p>📋 How to Use the Form
+                    <br>Select Caller Type:</br> 
+                    <br>Choose who is initiating the transport (e.g. MTM, CTS, Private, etc.).</br>
+                    <br>Enter Caller’s Name:</br>
+                    <br>Helps associate the call with the person initiating it.</br>
+                    <br>Select Run Type:</br>
+                    <br>Determines the type of service (BLS, ALS, Emergency, etc.).</br>
+                    <br>Enter Patient Details:</br>
+                    <br>Fill in first name, last name, date of birth, and pick-up/destination addresses.</br>
+                    <br>Set Pick-Up and Appointment Times:</br>
+                    <br>Specify timing to help with scheduling.</br>
+
+                    <br>Enable Return Ride (if applicable):</br>
+                    <br>This will reveal additional fields and auto-fill reverse addresses. You can adjust them if needed.</br>
+
+                    <br>Choose Service Type and Input Distance or Fixed Price:</br>
+                    <br>The system will calculate the cost based on your input.</br>
+
+                    <br>Click “Print” to Generate a Summary:</br>
+                    <br>Use your browser’s print dialog to save as PDF or send to a printer.</br>
+
+                    <br>⚙️ This tool is still under active development. Some features are experimental or planned for future updates.</br>
+            </section>
+        </main>
+    </body>
+
     <script src="js/ui.js" defer></script>
     <script src="js/pricing.js" defer></script>
     <script src="js/form.js" defer></script>

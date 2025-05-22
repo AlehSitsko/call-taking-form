@@ -4,6 +4,25 @@ body {
     background-color: #f8f9fa;
 }
 
+.layout {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+}
+
+.left-pane {
+  flex: 2;
+  max-width: 65%;
+}
+
+.right-pane {
+  flex: 1;
+  background-color: #f3f3f3;
+  border-left: 2px solid #ddd;
+  padding: 20px;
+  min-height: 100vh;
+}
 h1 {
     font-size: 1.5em;
     margin-bottom: 10px;
@@ -49,6 +68,21 @@ textarea {
     gap: 10px;
     font-weight: bold;
 }
+
+/* Will Call checkbox highlight */
+.will-call-checkbox {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
 
 /* Buttons */
 button {

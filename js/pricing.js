@@ -38,29 +38,39 @@ function calculatePrice(serviceType, miles) {
 // Display the calculated price
 function displayPrice() {
     const serviceType = document.getElementById('serviceType').value;
+    const hasReturnRide = document.getElementById('HasAReturnRide').checked;
+    const resultElement = document.getElementById('result');
 
     if (serviceType === 'fixed') {
         const fixedPrice = parseFloat(document.getElementById('fixedPrice').value);
         if (!isNaN(fixedPrice)) {
-            setPriceResult(`The total price (fixed) is $${fixedPrice.toFixed(2)}`);
+            if (hasReturnRide) {
+                resultElement.innerHTML =
+                    `One-way price: $${fixedPrice.toFixed(2)}<br>` +
+                    `Round-trip total: $${(fixedPrice * 2).toFixed(2)}`;
+            } else {
+                resultElement.innerText = `The total price (fixed) is $${fixedPrice.toFixed(2)}`;
+            }
         } else {
-            setPriceResult("Please enter a valid fixed price.");
+            resultElement.innerText = "Please enter a valid fixed price.";
         }
         return;
     }
 
     const miles = parseFloat(document.getElementById('miles').value);
-    if (isNaN(miles) || miles < 0) {
-        setPriceResult("Please enter valid mileage.");
-        return;
-    }
-
     const price = calculatePrice(serviceType, miles);
 
     if (price !== null) {
-        setPriceResult(`The total price for ${serviceType} with ${miles} miles is $${price.toFixed(2)}`);
+        if (hasReturnRide) {
+            resultElement.innerHTML =
+                `One-way price: $${price.toFixed(2)}<br>` +
+                `Round-trip total: $${(price * 2).toFixed(2)}`;
+        } else {
+            resultElement.innerText =
+                `The total price for ${serviceType} with ${miles} miles is $${price.toFixed(2)}`;
+        }
     } else {
-        setPriceResult("Invalid service type.");
+        resultElement.innerText = "Invalid service type.";
     }
 }
 
