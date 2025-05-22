@@ -14,6 +14,8 @@ Return ride section with auto-filled reverse addresses
 
 Fixed price and mileage-based calculations
 
+Waiting time surcharge input
+
 Print-friendly layout
 
 Modular JS structure for UI, pricing, form logic, and future patient data handling
@@ -36,7 +38,7 @@ CallTakingForm/
 
 Just open index.html in your browser. No backend or database is currently connected.
 
-📝 Changelog
+📜 Changelog
 
 [May 21–22, 2025]
 
@@ -49,6 +51,18 @@ Auto-fill reverse address values
 Add "Will Call" option to disable return time field
 
 Styled and aligned return ride checkbox
+
+⚖️ Round-Trip Pricing
+
+One-way vs Total pricing split
+
+Return Ride mileage doubles base + per mile charge
+
+⚖️ Waiting Time Logic
+
+Manual field to enter waiting time cost
+
+Only added once (not multiplied by 2)
 
 🔧 Refactoring & UI
 
@@ -75,7 +89,6 @@ C. Codebase Improvements
 
 
 D. Visual and UX
-
 
 
 
