@@ -33,9 +33,6 @@ CallTakingForm/
 ├── index.html
 └── README.md
 
-markdown
-Copy
-Edit
 
 ---
 
