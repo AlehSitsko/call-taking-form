@@ -7,7 +7,7 @@ const bls6Price = 1053;
 const alsPrice = 421.54;
 const milePrice = 13.2;
 
-// Calculate price for mileage-based services
+// Calculate base price depending on service type
 function calculatePrice(serviceType, miles) {
     let basePrice;
 
@@ -27,6 +27,9 @@ function calculatePrice(serviceType, miles) {
         case 'als':
             basePrice = alsPrice;
             break;
+        case 'emergency':
+        case 'privateTransfer':
+            return null; // Will be manually entered
         default:
             console.warn("Invalid service type:", serviceType);
             return null;
@@ -39,47 +42,68 @@ function calculatePrice(serviceType, miles) {
 function displayPrice() {
     const serviceType = document.getElementById('serviceType').value;
     const hasReturnRide = document.getElementById('HasAReturnRide').checked;
+    const milesInput = document.getElementById('miles');
+    const fixedInput = document.getElementById('fixedPrice');
+    const waitingChargeInput = document.getElementById('waitingTimeCharge');
+    const waitingCharge = waitingChargeInput ? parseFloat(waitingChargeInput.value) || 0 : 0;
     const resultElement = document.getElementById('result');
 
+
+    // Handle fixed price mode
     if (serviceType === 'fixed') {
-        const fixedPrice = parseFloat(document.getElementById('fixedPrice').value);
+        const fixedPrice = parseFloat(fixedInput.value);
         if (!isNaN(fixedPrice)) {
-            if (hasReturnRide) {
-                resultElement.innerHTML =
-                    `One-way price: $${fixedPrice.toFixed(2)}<br>` +
-                    `Round-trip total: $${(fixedPrice * 2).toFixed(2)}`;
-            } else {
-                resultElement.innerText = `The total price (fixed) is $${fixedPrice.toFixed(2)}`;
-            }
+            const oneWay = fixedPrice + waitingCharge;
+            const total = hasReturnRide ? (fixedPrice * 2) + waitingCharge : oneWay;
+            resultElement.innerHTML =
+                hasReturnRide
+                    ? `One-way price: $${oneWay.toFixed(2)}<br>Round-trip total: $${total.toFixed(2)}`
+                    : `Total price (fixed): $${oneWay.toFixed(2)}`;
         } else {
             resultElement.innerText = "Please enter a valid fixed price.";
         }
         return;
     }
 
-    const miles = parseFloat(document.getElementById('miles').value);
-    const price = calculatePrice(serviceType, miles);
+    // Handle manually entered service types (emergency/privateTransfer)
+    if (serviceType === 'emergency' || serviceType === 'privateTransfer') {
+        const manualBase = parseFloat(milesInput.value) || 0;
 
-    if (price !== null) {
-        if (hasReturnRide) {
-            resultElement.innerHTML =
-                `One-way price: $${price.toFixed(2)}<br>` +
-                `Round-trip total: $${(price * 2).toFixed(2)}`;
-        } else {
-            resultElement.innerText =
-                `The total price for ${serviceType} with ${miles} miles is $${price.toFixed(2)}`;
+        if (!manualBase && !waitingCharge) {
+            resultElement.innerText = "Please enter price manually or include waiting time.";
+            return;
         }
+
+        const oneWay = manualBase + waitingCharge;
+        const total = hasReturnRide ? (manualBase * 2) + waitingCharge : oneWay;
+        resultElement.innerHTML =
+            hasReturnRide
+                ? `One-way price: $${oneWay.toFixed(2)}<br>Round-trip total: $${total.toFixed(2)}`
+                : `Total price (manual): $${oneWay.toFixed(2)}`;
+        return;
+    }
+
+    // Handle mileage-based services
+    const miles = parseFloat(milesInput.value);
+    if (isNaN(miles)) {
+        resultElement.innerText = "Please enter a valid number of miles.";
+        return;
+    }
+
+    const price = calculatePrice(serviceType, miles);
+    if (price !== null) {
+        const oneWay = price + waitingCharge;
+        const total = hasReturnRide ? (price * 2) + waitingCharge : oneWay;
+        resultElement.innerHTML =
+            hasReturnRide
+                ? `One-way price: $${oneWay.toFixed(2)}<br>Round-trip total: $${total.toFixed(2)}`
+                : `Total price: $${oneWay.toFixed(2)}`;
     } else {
-        resultElement.innerText = "Invalid service type.";
+        resultElement.innerText = "Service type requires manual entry.";
     }
 }
 
-// Helper to update price display
-function setPriceResult(text) {
-    document.getElementById('result').innerText = text;
-}
-
-// Bind event on load
+// Initialize pricing logic on form submit
 function initPricing() {
     const priceForm = document.getElementById('priceCalculatorForm');
     if (priceForm) {

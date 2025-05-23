@@ -7,8 +7,8 @@ function ifFixedPrice() {
 
     serviceTypeSelect.addEventListener('change', () => {
         const selectedType = serviceTypeSelect.value;
-
         const isFixed = selectedType === 'fixed';
+
         fixedInput.style.display = isFixed ? 'inline-block' : 'none';
         fixedLabel.style.display = isFixed ? 'inline-block' : 'none';
         milesInput.disabled = isFixed;
@@ -43,14 +43,19 @@ function syncRunTypeWithServiceType() {
     runType.addEventListener('change', updateServiceType);
 }
 
-// Toggle return ride section based on checkbox state
+// Toggle return ride section and waiting time input based on checkbox state
 function toggleReturnRide() {
     const checkbox = document.getElementById('HasAReturnRide');
     const section = document.getElementById('returnRideSection');
+    const waitingContainer = document.getElementById('waitingTimeChargeContainer');
 
     checkbox.addEventListener('change', () => {
         const show = checkbox.checked;
+
         section.style.display = show ? 'block' : 'none';
+        if (waitingContainer) {
+            waitingContainer.style.display = show ? 'block' : 'none';
+        }
 
         if (show) {
             const pickup = document.getElementById('patientAddress').value;
@@ -59,27 +64,26 @@ function toggleReturnRide() {
             document.getElementById('returnRidePickUpAddress').value = destination;
             document.getElementById('returnDestinationAddress').value = pickup;
 
-            // Will Call logic (safe only if element exists now)
             const willCallCheckbox = document.getElementById('isWillCall');
             const returnTimeField = document.getElementById('returnPickUpTime');
 
-            if (willCallCheckbox && returnTimeField) {
+            if (willCallCheckbox && returnTimeField && !willCallCheckbox.dataset.bound) {
                 willCallCheckbox.addEventListener('change', function () {
                     returnTimeField.disabled = this.checked;
                     returnTimeField.style.opacity = this.checked ? '0.5' : '1';
                 });
+                willCallCheckbox.dataset.bound = 'true'; // prevent rebinding
             }
         }
     });
 }
-
 
 // Print the entire page
 function printPage() {
     window.print();
 }
 
-// UI toggles and form behavior initialization
+// Initialize all UI interactions
 function initUI() {
     ifFixedPrice();
     syncRunTypeWithServiceType();
