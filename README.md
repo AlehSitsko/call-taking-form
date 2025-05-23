@@ -1,97 +1,116 @@
-Call Taking Form and Price Calculator
+# Call Taking Form and Price Calculator
 
 A modular HTML/JavaScript web application for managing ambulance call-taking, calculating service prices, and optionally collecting patient data. Designed for internal dispatch/logistics usage.
 
-🔧 Features
+---
 
-Patient info form
+## 🔧 Features
 
-Run and service type selection
+- Modular form system for caller and patient information
+- Optional Return Ride section with autofill for reversed addresses
+- “Will Call” logic to handle uncertain return times
+- Independent and manually enabled price calculator
+- Service type selection based on patient weight
+- Mileage-based and fixed-price calculations
+- Waiting Time Charge field
+- Print-friendly layout (PDF-ready)
+- Modern UI layout with left/right panes
+- Modular JavaScript structure (UI, pricing, form, patient DB placeholder)
 
-Return ride section with auto-filled reverse addresses
+---
 
-"Will Call" logic for uncertain return times
-
-Fixed price and mileage-based calculations
-
-Waiting time surcharge input
-
-Print-friendly layout
-
-Modular JS structure for UI, pricing, form logic, and future patient data handling
-
-🗂 Folder Structure
+## 🗂 Folder Structure
 
 CallTakingForm/
 ├── css/
-│   └── style.css
+│ └── style.css
 ├── js/
-│   ├── form.js          # Form handling (future logic)
-│   ├── main.js          # Initialization entry point
-│   ├── patient.js       # Placeholder for patient DB logic
-│   ├── pricing.js       # Price calculation logic
-│   └── ui.js            # UI behavior (toggles, syncing)
+│ ├── form.js
+│ ├── main.js
+│ ├── patient.js
+│ ├── pricing.js
+│ └── ui.js
 ├── index.html
 └── README.md
 
-🚀 Getting Started
+markdown
+Copy
+Edit
 
-Just open index.html in your browser. No backend or database is currently connected.
+---
 
-📜 Changelog
+## 🚀 Getting Started
 
-[May 21–22, 2025]
+1. Clone the repo or download the files.
+2. Open `index.html` in your browser.
+3. No backend required. All functionality is client-side.
 
-✅ Major Feature: Return Ride Logic
+---
 
-Show/hide return fields with checkbox
+## 💡 How to Use
 
-Auto-fill reverse address values
+### Left Panel (Main Form)
+- **Caller Type / Name** → Who is calling
+- **Run Type** → Type of medical transport
+- **Patient Info** → Names, DOB, addresses, appointment time
+- **Return Ride** → Check the box to activate and reverse pickup/destination
+- **Will Call** → If return time is unknown
+- **Waiting Time Charge** → Optional fee added if crew must wait
 
-Add "Will Call" option to disable return time field
+### Right Panel (Optional Price Calculator)
+- Enable manually when needed (patient-paid trips or uninsured rides)
+- **Service Type selection based on patient weight:**
+  - 1–240 lbs → `BLS`
+  - 241–300 lbs → `BLS3`
+  - 301–400 lbs → `BLS4`
+  - 401+ lbs → `BLS6`
+  - `ALS` → If paramedic is required
+- **Exclude Miles** → Optionally disable mileage charge
+- **Add Waiting Time Charge** → Included once (not doubled for return)
+- **Print** → Generate PDF or print using your browser
 
-Styled and aligned return ride checkbox
+---
 
-⚖️ Round-Trip Pricing
+## 📝 Changelog
 
-One-way vs Total pricing split
+### [May 24, 2025]
+- Refactored price calculator to be optional and moved it to the right panel
+- Removed `Emergency` and `Private Transfer` from price options
+- Return Ride logic restored after logic loss
+- Added FAQ in calculator panel explaining how to choose service types by weight
+- Enhanced instruction sections in both panes
+- Improved logic around mileage exclusion and waiting time
+- Visual refinements and layout cleanup
 
-Return Ride mileage doubles base + per mile charge
+---
 
-⚖️ Waiting Time Logic
+## 🔮 Planned Features
 
-Manual field to enter waiting time cost
+### A. Pricing Enhancements
+- [ ] Round-trip logic with double mileage
+- [ ] Optional services: wheelchair, oxygen, stretcher
+- [ ] Invoice/PDF export with cost breakdown
+- [ ] Insurance logic (copay/auth)
 
-Only added once (not multiplied by 2)
+### B. Patient DB
+- [ ] Add patient saving locally or via Flask backend
+- [ ] Search by name / DOB
+- [ ] Save complete form entries as JSON
+- [ ] History log of calls
+- [ ] Long-term SQL storage
 
-🔧 Refactoring & UI
+### C. UI and Behavior
+- [ ] Auto-expand textareas
+- [ ] Age calculation from DOB
+- [ ] Auto-capitalize names
+- [ ] Required field validation
 
-Modular split of JS files finalized
+### D. Extra / Low Priority
+- [ ] Map integration (Leaflet or Google Maps)
+- [ ] Distance calculation from addresses
+- [ ] Email dispatch of call summaries
 
-Left/Right pane layout introduced
+---
 
-Informational block added to right pane
-
-Codebase organized and verified
-
-🔮 Planned Features
-
-A. Pricing Enhancements
-
-
-
-B. Patient Data Module
-
-
-
-C. Codebase Improvements
-
-
-
-D. Visual and UX
-
-
-
-This project is actively evolving. Contributions, suggestions, and reviews are welcome.
-
-Built with pragmatism by Aleh Sitsko
+> Built with precision by Aleh Sitsko  
+> Feedback and contributions are welcome
