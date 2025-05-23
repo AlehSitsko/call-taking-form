@@ -1,61 +1,45 @@
 // Toggle fixed price input and disable miles based on service type
-function ifFixedPrice() {
-    const serviceTypeSelect = document.getElementById('serviceType');
-    const fixedInput = document.getElementById('fixedPrice');
+function toggleFixedPriceDisplay() {
+    const serviceType = document.getElementById('serviceType');
     const fixedLabel = document.getElementById('fixedPriceLabel');
+    const fixedInput = document.getElementById('fixedPrice');
     const milesInput = document.getElementById('miles');
 
-    serviceTypeSelect.addEventListener('change', () => {
-        const selectedType = serviceTypeSelect.value;
-        const isFixed = selectedType === 'fixed';
-
-        fixedInput.style.display = isFixed ? 'inline-block' : 'none';
+    serviceType.addEventListener('change', () => {
+        const isFixed = serviceType.value === 'fixed';
         fixedLabel.style.display = isFixed ? 'inline-block' : 'none';
+        fixedInput.style.display = isFixed ? 'inline-block' : 'none';
         milesInput.disabled = isFixed;
     });
 }
 
-// Sync run type with service type and apply it immediately
-function syncRunTypeWithServiceType() {
-    const runType = document.getElementById('runType');
-    const serviceType = document.getElementById('serviceType');
+// Enable/disable calculator section
+function toggleCalculator() {
+    const enableCheckbox = document.getElementById('enableCalculator');
+    const calculatorSection = document.getElementById('calculatorFields');
 
-    function updateServiceType() {
-        const selectedValue = runType.value;
-        const selectedText = runType.options[runType.selectedIndex].text;
-
-        serviceType.innerHTML = '';
-
-        const mainOption = document.createElement('option');
-        mainOption.value = selectedValue;
-        mainOption.text = selectedText;
-        serviceType.appendChild(mainOption);
-
-        const fixedOption = document.createElement('option');
-        fixedOption.value = 'fixed';
-        fixedOption.text = 'Fixed Price';
-        serviceType.appendChild(fixedOption);
-
-        serviceType.dispatchEvent(new Event('change'));
-    }
-
-    updateServiceType();
-    runType.addEventListener('change', updateServiceType);
+    enableCheckbox.addEventListener('change', () => {
+        calculatorSection.style.display = enableCheckbox.checked ? 'block' : 'none';
+    });
 }
 
-// Toggle return ride section and waiting time input based on checkbox state
+// Exclude miles toggle
+function toggleExcludeMiles() {
+    const excludeCheckbox = document.getElementById('excludeMilesCheckbox');
+    const milesInput = document.getElementById('miles');
+
+    excludeCheckbox.addEventListener('change', () => {
+        milesInput.disabled = excludeCheckbox.checked;
+    });
+}
+// Toggle return ride option
 function toggleReturnRide() {
     const checkbox = document.getElementById('HasAReturnRide');
     const section = document.getElementById('returnRideSection');
-    const waitingContainer = document.getElementById('waitingTimeChargeContainer');
 
     checkbox.addEventListener('change', () => {
         const show = checkbox.checked;
-
         section.style.display = show ? 'block' : 'none';
-        if (waitingContainer) {
-            waitingContainer.style.display = show ? 'block' : 'none';
-        }
 
         if (show) {
             const pickup = document.getElementById('patientAddress').value;
@@ -67,25 +51,24 @@ function toggleReturnRide() {
             const willCallCheckbox = document.getElementById('isWillCall');
             const returnTimeField = document.getElementById('returnPickUpTime');
 
-            if (willCallCheckbox && returnTimeField && !willCallCheckbox.dataset.bound) {
+            if (willCallCheckbox && returnTimeField) {
                 willCallCheckbox.addEventListener('change', function () {
                     returnTimeField.disabled = this.checked;
                     returnTimeField.style.opacity = this.checked ? '0.5' : '1';
                 });
-                willCallCheckbox.dataset.bound = 'true'; // prevent rebinding
             }
         }
     });
 }
-
 // Print the entire page
 function printPage() {
     window.print();
 }
 
-// Initialize all UI interactions
+// Initialize UI behaviors
 function initUI() {
-    ifFixedPrice();
-    syncRunTypeWithServiceType();
+    toggleFixedPriceDisplay();
+    toggleCalculator();
+    toggleExcludeMiles();
     toggleReturnRide();
 }
