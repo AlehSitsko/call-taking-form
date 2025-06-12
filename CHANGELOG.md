@@ -40,3 +40,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Core HTML structure: Caller Type, Run Type, Patient Info
 - Initial layout and forms for data collection
+
+## May 27, 2025
+### Added
+- Support for dynamic display of "Other" field when selecting "Other" as Caller Type.

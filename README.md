@@ -7,6 +7,7 @@ A modular HTML/JavaScript web application for managing ambulance call-taking, ca
 ## 🔧 Features
 
 - Modular form system for caller and patient information
+- Dynamic "Other" field for custom caller types
 - Optional Return Ride section with autofill for reversed addresses
 - “Will Call” logic to handle uncertain return times
 - Independent and manually enabled price calculator
@@ -16,23 +17,6 @@ A modular HTML/JavaScript web application for managing ambulance call-taking, ca
 - Print-friendly layout (PDF-ready)
 - Modern UI layout with left/right panes
 - Modular JavaScript structure (UI, pricing, form, patient DB placeholder)
-
----
-
-## 🗂 Folder Structure
-
-CallTakingForm/
-├── css/
-│ └── style.css
-├── js/
-│ ├── form.js
-│ ├── main.js
-│ ├── patient.js
-│ ├── pricing.js
-│ └── ui.js
-├── index.html
-└── README.md
-
 
 ---
 
@@ -47,7 +31,9 @@ CallTakingForm/
 ## 💡 How to Use
 
 ### Left Panel (Main Form)
-- **Caller Type / Name** → Who is calling
+
+- **Caller Type / Name** → Who is calling  
+  - If "Other" is selected, an additional field will appear to specify custom caller type
 - **Run Type** → Type of medical transport
 - **Patient Info** → Names, DOB, addresses, appointment time
 - **Return Ride** → Check the box to activate and reverse pickup/destination
@@ -55,6 +41,7 @@ CallTakingForm/
 - **Waiting Time Charge** → Optional fee added if crew must wait
 
 ### Right Panel (Optional Price Calculator)
+
 - Enable manually when needed (patient-paid trips or uninsured rides)
 - **Service Type selection based on patient weight:**
   - 1–240 lbs → `BLS`
@@ -68,31 +55,16 @@ CallTakingForm/
 
 ---
 
-## 📝 Changelog
-
-### [May 24, 2025]
-- Refactored price calculator to be optional and moved it to the right panel
-- Removed `Emergency` and `Private Transfer` from price options
-- Return Ride logic restored after logic loss
-- Added FAQ in calculator panel explaining how to choose service types by weight
-- Enhanced instruction sections in both panes
-- Improved logic around mileage exclusion and waiting time
-- Visual refinements and layout cleanup
-
-## ✅ Daily Progress Log
-
-- 2025-05-27: UI refactor complete, logic streamlined.
----
-
 ## 🔮 Planned Features
 
 ### A. Pricing Enhancements
+
 - [ ] Round-trip logic with double mileage
-- [ ] Optional services: wheelchair, oxygen, stretcher
 - [ ] Invoice/PDF export with cost breakdown
 - [ ] Insurance logic (copay/auth)
 
 ### B. Patient DB
+
 - [ ] Add patient saving locally or via Flask backend
 - [ ] Search by name / DOB
 - [ ] Save complete form entries as JSON
@@ -100,12 +72,14 @@ CallTakingForm/
 - [ ] Long-term SQL storage
 
 ### C. UI and Behavior
+
 - [ ] Auto-expand textareas
 - [ ] Age calculation from DOB
 - [ ] Auto-capitalize names
 - [ ] Required field validation
 
 ### D. Extra / Low Priority
+
 - [ ] Map integration (Leaflet or Google Maps)
 - [ ] Distance calculation from addresses
 - [ ] Email dispatch of call summaries

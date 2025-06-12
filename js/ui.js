@@ -60,6 +60,16 @@ function toggleReturnRide() {
         }
     });
 }
+
+// toggle the visibility of the "Other" field based on the selected caller type
+function toggleOtherCallerType() {
+    const callerType = document.getElementById('callerType');
+    const otherCallerType = document.getElementById('otherCallerType');
+
+    callerType.addEventListener('change', () => {
+        otherCallerType.style.display = callerType.value === 'other' ? 'inline-block' : 'none';
+    });
+}
 // Print the entire page
 function printPage() {
     window.print();
@@ -71,4 +81,5 @@ function initUI() {
     toggleCalculator();
     toggleExcludeMiles();
     toggleReturnRide();
+    toggleOtherCallerType();
 }
