@@ -20,11 +20,10 @@ A modular HTML/JavaScript web application for managing ambulance call-taking, ca
 
 ---
 
-## 🚀 Getting Started
+## 🔗 Live Demo  
+**Use it directly:**  
+[https://alehsitsko.github.io/call-taking-form/](https://alehsitsko.github.io/call-taking-form/)
 
-1. Clone the repo or download the files.
-2. Open `index.html` in your browser.
-3. No backend required. All functionality is client-side.
 
 ---
 
