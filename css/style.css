@@ -1,3 +1,4 @@
+/* === General Styles === */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -23,6 +24,7 @@ body {
   padding: 20px;
   min-height: 100vh;
 }
+
 h1 {
     font-size: 1.5em;
     margin-bottom: 10px;
@@ -46,16 +48,20 @@ textarea {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 textarea {
-    resize: vertical;
+    resize: none;
+    overflow: hidden;
     min-height: 40px;
+    box-sizing: content-box; /* Required for correct scrollHeight behavior */
+    padding: 8px;
+    font-size: 14px;
 }
 
-/* Return Ride checkbox highlight */
+/* === Highlighted Sections === */
 .return-ride-checkbox {
     background-color: #e6f0ff;
     border: 1px solid #007bff;
@@ -69,7 +75,6 @@ textarea {
     font-weight: bold;
 }
 
-/* Will Call checkbox highlight */
 .will-call-checkbox {
     background-color: #fff3cd;
     border: 1px solid #ffc107;
@@ -83,8 +88,7 @@ textarea {
     font-weight: bold;
 }
 
-
-/* Buttons */
+/* === Buttons === */
 button {
     padding: 8px 16px;
     margin-top: 10px;
@@ -103,4 +107,52 @@ button:hover {
 #result {
     margin-top: 15px;
     font-weight: bold;
+}
+
+/* === Mobile Responsive Layout === */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .left-pane,
+    .right-pane {
+        max-width: 100%;
+        flex: 1;
+    }
+
+    .right-pane {
+        border-left: none;
+        border-top: 2px solid #ddd;
+        min-height: auto;
+    }
+}
+
+/* === Print Styles === */
+@media print {
+    body {
+        background: white;
+        margin: 0;
+    }
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .right-pane {
+        display: none; /* Hide calculator section */
+    }
+
+    textarea {
+        resize: none;
+        overflow: visible !important;
+        height: auto !important;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    button {
+        display: none;
+    }
 }

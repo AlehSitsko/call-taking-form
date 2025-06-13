@@ -2,6 +2,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     initUI();
     initPricing();
-    initFormLogic();
     initPatientModule();
+    initTextAreaAutoResize();
 });

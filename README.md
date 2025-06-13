@@ -17,6 +17,9 @@ A modular HTML/JavaScript web application for managing ambulance call-taking, ca
 - Print-friendly layout (PDF-ready)
 - Modern UI layout with left/right panes
 - Modular JavaScript structure (UI, pricing, form, patient DB placeholder)
+- 📝 Auto-expanding textareas for better input visibility
+- 📱 Responsive layout using CSS media queries
+- 🖨️ Print-friendly formatting (form only, hides calculator)
 
 ---
 

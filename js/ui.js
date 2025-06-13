@@ -70,6 +70,21 @@ function toggleOtherCallerType() {
         otherCallerType.style.display = callerType.value === 'other' ? 'inline-block' : 'none';
     });
 }
+
+// Function for autoresize textareas
+function autoResizeTextArea(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+}
+// Attach the autoResizeTextArea function to all textareas
+function initTextAreaAutoResize() {
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+        textarea.addEventListener('input', () => autoResizeTextArea(textarea));
+        // Initial resize
+        autoResizeTextArea(textarea);
+    });
+}
 // Print the entire page
 function printPage() {
     window.print();
