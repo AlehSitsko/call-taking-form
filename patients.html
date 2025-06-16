@@ -32,7 +32,7 @@
       <div id="patientResults"></div>
     </div>
 
-    <div class="right-pane" id="patientFormPane" style="display:none;">
+    <div class="right-pane" id="patientFormPane">
       <h2>Edit Patient</h2>
 
       <form id="patientForm">
@@ -60,6 +60,22 @@
         <button type="submit">Save</button>
         <button type="button" id="cancelBtn">Cancel</button>
       </form>
+
+      <section class="faq" style="margin-top: 2rem; font-size: 0.95em; line-height: 1.6;">
+        <h3>🛡️ FAQ: Data Privacy and Security</h3>
+
+        <p><strong>💬 Does this project handle real patient data?</strong><br>
+        No. This is an <strong>educational project only</strong>. All patient data used in the system is <em>fictional</em> and provided for demonstration purposes only. This tool is not intended for clinical or commercial use.</p>
+
+        <p><strong>🔐 Does this app collect personal information?</strong><br>
+        No. The project does not collect, store, or transmit any personal data. The database is entirely local and not connected to any external servers or cloud services.</p>
+
+        <p><strong>🧠 Why is there a database at all?</strong><br>
+        The database is included strictly for learning purposes — to demonstrate application architecture, API integration, data validation, and local storage. All actions are available only to the project author, locally.</p>
+
+        <p><strong>📄 Is this project HIPAA/GDPR compliant?</strong><br>
+        No, since it does <strong>not process any real personal data</strong>. However, the code and design follow security best practices and can be adapted for compliance in future production versions.</p>
+      </section>
     </div>
   </div>
 </body>
