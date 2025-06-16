@@ -1,92 +1,83 @@
-# Call Taking Form and Price Calculator
+# 📝 Call Taking Form
 
-A modular HTML/JavaScript web application for managing ambulance call-taking, calculating service prices, and optionally collecting patient data. Designed for internal dispatch/logistics usage.
-
----
-
-## 🔧 Features
-
-- Modular form system for caller and patient information
-- Dynamic "Other" field for custom caller types
-- Optional Return Ride section with autofill for reversed addresses
-- “Will Call” logic to handle uncertain return times
-- Independent and manually enabled price calculator
-- Service type selection based on patient weight
-- Mileage-based and fixed-price calculations
-- Waiting Time Charge field
-- Print-friendly layout (PDF-ready)
-- Modern UI layout with left/right panes
-- Modular JavaScript structure (UI, pricing, form, patient DB placeholder)
-- 📝 Auto-expanding textareas for better input visibility
-- 📱 Responsive layout using CSS media queries
-- 🖨️ Print-friendly formatting (form only, hides calculator)
-
----
+Web-based EMS trip intake form with built-in price calculator, mobile support, and future-ready modular expansion.
 
 ## 🔗 Live Demo  
 **Use it directly:**  
 [https://alehsitsko.github.io/call-taking-form/](https://alehsitsko.github.io/call-taking-form/)
 
+## 📁 Project Structure
+
+project/
+├── index.html # Main form
+├── patients.html # (Upcoming) Patient DB interface
+├── css/
+│ └── style.css # Main and print styles
+├── js/
+│ ├── main.js # Initialization
+│ ├── ui.js # DOM/UI behavior
+│ ├── pricing.js # Price calculator
+│ ├── form.js # Submission/event logic
+│ └── patient.js # Patient DB logic (WIP)
+
 
 ---
 
-## 💡 How to Use
+## ✨ Features
 
-### Left Panel (Main Form)
-
-- **Caller Type / Name** → Who is calling  
-  - If "Other" is selected, an additional field will appear to specify custom caller type
-- **Run Type** → Type of medical transport
-- **Patient Info** → Names, DOB, addresses, appointment time
-- **Return Ride** → Check the box to activate and reverse pickup/destination
-- **Will Call** → If return time is unknown
-- **Waiting Time Charge** → Optional fee added if crew must wait
-
-### Right Panel (Optional Price Calculator)
-
-- Enable manually when needed (patient-paid trips or uninsured rides)
-- **Service Type selection based on patient weight:**
-  - 1–240 lbs → `BLS`
-  - 241–300 lbs → `BLS3`
-  - 301–400 lbs → `BLS4`
-  - 401+ lbs → `BLS6`
-  - `ALS` → If paramedic is required
-- **Exclude Miles** → Optionally disable mileage charge
-- **Add Waiting Time Charge** → Included once (not doubled for return)
-- **Print** → Generate PDF or print using your browser
+- Modular intake form for EMS calls
+- Return ride and "Will Call" logic
+- Dynamic price calculator:
+  - Base price by service type
+  - Mileage (with optional exclusion)
+  - Waiting time charges
+  - One-way and round-trip totals
+- Smart layout (desktop and mobile)
+- Print-optimized billing summary
+- Future integration with database and email
 
 ---
 
-## 🔮 Planned Features
+## 🧾 Price Calculator & Print Support
 
-### A. Pricing Enhancements
+The price calculator now provides a detailed cost breakdown, including:
+- Base service price
+- Mileage
+- Waiting time
+- Full and return trip totals
 
-- [ ] Round-trip logic with double mileage
-- [ ] Invoice/PDF export with cost breakdown
-- [ ] Insurance logic (copay/auth)
+### 📋 Display
+- Breakdown shown **directly below** the calculator
+- Clean, formatted block for clarity
 
-### B. Patient DB
+### 🖨️ Print Mode
+- Inputs and buttons hidden
+- Summary block preserved
+- FAQ and helper elements suppressed
 
-- [ ] Add patient saving locally or via Flask backend
-- [ ] Search by name / DOB
-- [ ] Save complete form entries as JSON
-- [ ] History log of calls
-- [ ] Long-term SQL storage
-
-### C. UI and Behavior
-
-- [ ] Auto-expand textareas
-- [ ] Age calculation from DOB
-- [ ] Auto-capitalize names
-- [ ] Required field validation
-
-### D. Extra / Low Priority
-
-- [ ] Map integration (Leaflet or Google Maps)
-- [ ] Distance calculation from addresses
-- [ ] Email dispatch of call summaries
+Built to ensure a readable, billable printout with zero clutter.
 
 ---
 
-> Built with precision by Aleh Sitsko  
-> Feedback and contributions are welcome
+## 🔜 Roadmap
+
+- [ ] **Patient page** (`patients.html`) with local DB + edit
+- [ ] History of trips per patient
+- [ ] File generation + prefilled email draft
+- [ ] Insurance info block (copay/auth)
+- [ ] Mileage calculation via maps
+- [ ] Role-based permissions
+- [ ] Offline-first or Electron build
+
+---
+---
+
+## 🧑‍💻 Author
+
+**Aleh Sitsko**  
+EMS Manager • Software Developer-in-Progress  
+Philadelphia, PA 🇺🇸
+
+## 📄 License
+
+MIT — free use, change, attribution appreciated.

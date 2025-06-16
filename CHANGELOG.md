@@ -2,56 +2,94 @@
 
 All notable changes to this project will be documented in this file.
 
+---
+
 ## [Unreleased]
 
-## [2025-06-13]
+- Patients page (`patients.html`) under development
+- Email sending logic via `mailto:` + file generation (planned)
+- Insurance info section (low priority)
+- Deployment pipeline and GitHub Pages setup
+
+---
+
+## [2025-06-16] — Price Breakdown & Print Optimization
+
 ### Added
-- Auto-expanding behavior for all `<textarea>` fields
-- Responsive design for mobile via media queries
-- Print-specific styles to hide calculator and simplify layout
+- 📦 Detailed price breakdown block showing base, mileage, wait time, and total cost
+- 🖨️ Print mode support for pricing: `#priceBreakdownContainer` displays cleanly on print
+- 💡 Visual layout enhancements with `.price-print-block` and improved spacing
+
+### Changed
+- Price output relocated into calculator pane (under the form)
+- Refactored `@media print` CSS to suppress inputs and show results only
+
+### Removed
+- FAQ visibility on printed version (hidden via `#faqSection` rule)
+
+---
+
+## [2025-06-13]
+
+### Added
+- Auto-expanding `<textarea>` fields
+- Mobile-first responsive layout with media queries
+- Initial print-friendly layout (hidden controls, clear sections)
 
 ### Fixed
-- Removed invalid `initFormLogic()` call that caused JS errors
-- Moved `#otherCallerType` input outside `<select>` for valid HTML structure
-- Corrected duplicate ID conflict for `waitingTimeCharge` fields
+- Removed stray `initFormLogic()` call causing JS crash
+- Moved dynamic caller input (`#otherCallerType`) outside `<select>` block
+- Resolved duplicate `id="waitingTimeCharge"` conflict in return section
 
 ### Improved
-- English comments added throughout `style.css`
-- Modular JS setup cleaned: only implemented modules are initialized
+- English comments added to `style.css`
+- Modular JS logic: `main.js` only initializes active modules
+
+---
 
 ## [2025-05-27]
+
 ### Added
-- FAQ section with weight-based service selection guide
-- Instructions below calculator and main form
-- Enable Calculator toggle
-- Option to exclude miles from calculation
-- Price Calculator relocated to right pane
-- Return Ride section with address autofill and Will Call toggle
-- Waiting Time Charge field
-- Support for Fixed Price and custom input logic
+- FAQ/help section with guidelines for service selection
+- Instruction labels under calculator and form
+- Toggle to enable calculator manually
+- Checkbox to exclude miles from pricing
+- Price Calculator moved to right-side panel
+- Return Ride section with address autofill logic and Will Call mode
+- Field for Waiting Time Charge
+- Support for Fixed Price service input
 
 ### Fixed
-- Return Ride section not displaying correctly
-- Emergency and Private Transfer service types removed from dropdown
-- Dynamic switching between run type and service type
-- UI rendering issues on mobile
+- Return Ride section not toggling correctly
+- Removed unsupported service types from dropdown (`emergency`, `privateTransfer`)
+- Logic bug with sync between run type and service type
+- Mobile layout adjustments
+
+---
 
 ## [2025-05-23]
+
 ### Added
-- Initial Price Calculator integration (miles + serviceType)
-- Fixed Price mode
-- Display of round-trip pricing
+- Basic Price Calculator (miles × multiplier)
+- Fixed Price override
+- Round-trip price calculation
 
 ### Fixed
-- Display errors on invalid service types
-- Price not updating when miles empty or invalid
+- Display errors with invalid inputs
+- Price not updating when mileage is blank or invalid
+
+---
 
 ## [2025-05-21]
+
 ### Added
-- Return Ride section toggle with auto-copy of addresses
-- Will Call checkbox logic
+- Toggleable Return Ride section with address mirror logic
+- Will Call checkbox logic and styling
+
+---
 
 ## [2025-05-20]
+
 ### Added
-- Core HTML structure: Caller Type, Run Type, Patient Info
-- Initial layout and forms for data collection
+- Initial HTML structure: Caller Info, Patient Info, Run Type
+- Baseline layout and form sections
