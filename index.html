@@ -1,154 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Call Taking Form and Price Calculator</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call Taking Form and Price Calculator</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/patient.js"></script>
 </head>
 <body>
 <main class="layout">
-    <section class="left-pane">
-        <a href="patients.html">
-            <button style="float: right;">🧑‍⚕️ Patients</button>
-        </a>
-        <h1>Call Taking Form</h1>
-        <form onsubmit="event.preventDefault();">
-            <label for="callerType">Caller Type:</label>
-            <select id="callerType" name="callerType">
-                <option value="mtm">MTM</option>
-                <option value="cts">CTS</option>
-                <option value="statesman">Statesman</option>
-                <option value="horsham">Horsham</option>
-                <option value="private">Private</option>
-                <option value="other">Other</option>
-            </select>
-            <input type="text" id="otherCallerType" placeholder="Specify Other Caller Type" style="display: none;" />
-            <input id="callerName" type="text" placeholder="Enter caller's name" />
-        </form>
+  <section class="left-pane">
+    <a href="patients.html">
+      <button type="button" style="float: right;">🧑‍⚕️ Patients</button>
+    </a>
+    <h1>Call Taking Form</h1>
 
-        <form id="runTypeForm">
-            <label for="runType">Run Type:</label>
-            <select name="runType" id="runType">
-                <option value="bls">BLS</option>
-                <option value="bls4">BLS4</option>
-                <option value="bls6">BLS6</option>
-                <option value="als">ALS</option>
-                <option value="emergency">Emergency</option>
-                <option value="privateTransfer">Private Transfer</option>
-            </select>
-        </form>
+    <form onsubmit="event.preventDefault();">
+      <label for="callerType">Caller Type:</label>
+      <select id="callerType" name="callerType">
+        <option value="mtm">MTM</option>
+        <option value="cts">CTS</option>
+        <option value="statesman">Statesman</option>
+        <option value="horsham">Horsham</option>
+        <option value="private">Private</option>
+        <option value="other">Other</option>
+      </select>
+      <input type="text" id="otherCallerType" placeholder="Specify Other Caller Type" style="display: none;" />
+      <input id="callerName" type="text" placeholder="Enter caller's name" />
+    </form>
 
-        <form id="patientInfoForm">
-            <label for="namePt">Patient's Name:</label>
-            <textarea id="namePt" placeholder="Enter Patient's Name"></textarea>
-            <label for="lastNamePT">Patient's Last Name:</label>
-            <textarea id="lastNamePT" placeholder="Enter Patient's Last Name"></textarea>
-            <label for="patientDOB">Patient's DOB:</label>
-            <input id="patientDOB" type="date" placeholder="Enter Patient's DOB" />
-            <label for="patientAddress">Pick Up Address:</label>
-            <textarea id="patientAddress" placeholder="Enter Patient's Pick Up Address"></textarea>
-            <label for="pickUpTime">Pick Up Time:</label>
-            <input id="pickUpTime" type="time" step="60" placeholder="Pick Up Time" />
-            <label for="destinationAddress">Destination Address:</label>
-            <textarea id="destinationAddress" placeholder="Enter Destination Address"></textarea>
-            <label for="aptTime">Appointment Time:</label>
-            <input id="aptTime" type="time" step="60" placeholder="Appointment Time" />
-            <label for="specialInstructions">Special Instructions:</label>
-            <textarea id="specialInstructions" placeholder="Enter Special Instructions"></textarea>
+    <form id="runTypeForm">
+      <label for="runType">Run Type:</label>
+      <select name="runType" id="runType">
+        <option value="bls">BLS</option>
+        <option value="bls4">BLS4</option>
+        <option value="bls6">BLS6</option>
+        <option value="als">ALS</option>
+        <option value="emergency">Emergency</option>
+        <option value="privateTransfer">Private Transfer</option>
+      </select>
+    </form>
 
-            <div class="return-ride-checkbox">
-                <label for="HasAReturnRide">Has a Return Ride:</label>
-                <input type="checkbox" id="HasAReturnRide" name="HasAReturnRide" />
-            </div>
+    <form id="patientInfoForm">
+      <label for="namePt">Patient's Name:</label>
+      <textarea id="namePt" placeholder="Enter Patient's Name"></textarea>
 
-            <div id="returnRideSection" style="display: none;">
-                <div class="will-call-checkbox">
-                    <input type="checkbox" id="isWillCall" />
-                    <label for="isWillCall">Will Call (Return time to be determined later)</label>
-                </div>
+      <label for="lastNamePT">Patient's Last Name:</label>
+      <textarea id="lastNamePT" placeholder="Enter Patient's Last Name"></textarea>
 
-                <label for="returnPickUpTime">Return Pick Up Time:</label>
-                <input id="returnPickUpTime" type="time" step="60" placeholder="Return Pick Up Time" />
+      <label for="patientDOB">Patient's DOB:</label>
+      <input id="patientDOB" type="date" placeholder="Enter Patient's DOB" />
 
-                <label for="returnRidePickUpAddress">Return Pick Up Address:</label>
-                <textarea id="returnRidePickUpAddress" placeholder="Enter Return Pick Up Address"></textarea>
+      <label for="patientAddress">Pick Up Address:</label>
+      <textarea id="patientAddress" placeholder="Enter Patient's Pick Up Address"></textarea>
 
-                <label for="returnDestinationAddress">Return Destination Address:</label>
-                <textarea id="returnDestinationAddress" placeholder="Enter Return Destination Address"></textarea>
+      <label for="pickUpTime">Pick Up Time:</label>
+      <input id="pickUpTime" type="time" step="60" placeholder="Pick Up Time" />
 
-                <label for="waitingTimeCharge">Waiting Time Charge ($):</label>
-                <input type="number" id="waitingTimeCharge" name="waitingTimeCharge" step="0.01" />
-            </div>
-            <!-- Print button -->
-            <button type="button" onclick="printPage()">Print</button>
-        </form>
+      <label for="destinationAddress">Destination Address:</label>
+      <textarea id="destinationAddress" placeholder="Enter Destination Address"></textarea>
 
-    </section>
+      <label for="aptTime">Appointment Time:</label>
+      <input id="aptTime" type="time" step="60" placeholder="Appointment Time" />
 
-    <section class="right-pane">
+      <label for="specialInstructions">Special Instructions:</label>
+      <textarea id="specialInstructions" placeholder="Enter Special Instructions"></textarea>
+
+      <div class="return-ride-checkbox">
+        <label for="HasAReturnRide">Has a Return Ride:</label>
+        <input type="checkbox" id="HasAReturnRide" name="HasAReturnRide" />
+      </div>
+
+      <div id="returnRideSection" style="display: none;">
+        <div class="will-call-checkbox">
+          <input type="checkbox" id="isWillCall" />
+          <label for="isWillCall">Will Call (Return time to be determined later)</label>
+        </div>
+
+        <label for="returnPickUpTime">Return Pick Up Time:</label>
+        <input id="returnPickUpTime" type="time" step="60" placeholder="Return Pick Up Time" />
+
+        <label for="returnRidePickUpAddress">Return Pick Up Address:</label>
+        <textarea id="returnRidePickUpAddress" placeholder="Enter Return Pick Up Address"></textarea>
+
+        <label for="returnDestinationAddress">Return Destination Address:</label>
+        <textarea id="returnDestinationAddress" placeholder="Enter Return Destination Address"></textarea>
+
+        <label for="waitingTimeChargeReturn">Waiting Time Charge ($):</label>
+        <input type="number" id="waitingTimeChargeReturn" name="waitingTimeChargeReturn" step="0.01" />
+      </div>
+
+      <button type="button" onclick="printPage()">Print</button>
+      <button id="sendEmailBtn" type="button">Send Email</button>
+    </form>
+  </section>
+
+  <section class="right-pane">
     <h1>Price Calculator</h1>
 
     <label>
-        <input type="checkbox" id="enableCalculator" />
-        Enable Calculator
+      <input type="checkbox" id="enableCalculator" />
+      Enable Calculator
     </label>
 
     <div id="calculatorFields" style="display: none;">
-        <form id="priceCalculatorForm">
-            <label for="serviceType">Service Type:</label>
-            <select id="serviceType" name="serviceType">
-                <option value="bls">BLS</option>
-                <option value="bls3">BLS3</option>
-                <option value="bls4">BLS4</option>
-                <option value="bls6">BLS6</option>
-                <option value="als">ALS</option>
-                <option value="fixed">Fixed Price</option>
-            </select>
+      <form id="priceCalculatorForm">
+        <label for="serviceType">Service Type:</label>
+        <select id="serviceType" name="serviceType">
+          <option value="bls">BLS</option>
+          <option value="bls3">BLS3</option>
+          <option value="bls4">BLS4</option>
+          <option value="bls6">BLS6</option>
+          <option value="als">ALS</option>
+          <option value="fixed">Fixed Price</option>
+        </select>
 
-            <label>
-                <input type="checkbox" id="excludeMilesCheckbox" />
-                Exclude Miles
-            </label>
+        <label>
+          <input type="checkbox" id="excludeMilesCheckbox" />
+          Exclude Miles
+        </label>
 
-            <label for="miles">Miles:</label>
-            <input type="number" id="miles" name="miles" step="0.1" />
+        <label for="miles">Miles:</label>
+        <input type="number" id="miles" name="miles" step="0.1" />
 
-            <label for="fixedPrice" id="fixedPriceLabel" style="display: none;">Enter Fixed Price:</label>
-            <input type="number" id="fixedPrice" name="fixedPrice" style="display: none;" />
+        <label for="fixedPrice" id="fixedPriceLabel" style="display: none;">Enter Fixed Price:</label>
+        <input type="number" id="fixedPrice" name="fixedPrice" style="display: none;" />
 
-            <label for="waitingTimeCharge">Waiting Time Charge ($):</label>
-            <input type="number" id="waitingTimeCharge" name="waitingTimeCharge" step="0.01" />
+        <label for="waitingTimeChargePrice">Waiting Time Charge ($):</label>
+        <input type="number" id="waitingTimeChargePrice" name="waitingTimeChargePrice" step="0.01" />
 
-            <button type="submit">Calculate Price</button>
-        </form>
-            <div id="priceBreakdownContainer" class="printable-price">
-                <p id="result"></p>
-            </div>
-        </div>
+        <button type="submit">Calculate Price</button>
+      </form>
+
+      <div id="priceBreakdownContainer" class="printable-price">
+        <p id="result"></p>
+      </div>
     </div>
-    <!-- FAQ Section -->
-     <section id="faqSection">
-        <p>📌 FAQ — Price Calculator</p>
-        <p><br>How do I choose the Service Type? Select the service based on the patient’s weight and medical needs:</br> 
-        <br>BLS – Patient weighs 1–240 lbs</br>
-        <br>BLS3 – Patient weighs 241–300 lbs</br>
-        <br>BLS4 – Patient weighs 301–400 lbs</br>
-        <br>BLS6 – Patient weighs 401+ lbs</br>
-        <br>ALS – Required when the patient needs a paramedic on board</br>
-        <br>⚠️ Choose the correct type to ensure appropriate equipment and crew.</br></p>
-        <p>📝 Form Instructions</p>
-        <p><br>How do I fill out the Call Taking Form?</br>
-        <br>1. Select the Caller Type and enter the caller’s name.</br>
-        <br>2. Choose the appropriate Run Type for the transport.</br>
-        <br>3. Fill out the patient’s name, DOB, and addresses.</br>
-        <br>4. Specify pick-up and appointment times.</br>
-        <br>5. If return transport is needed, enable Return Ride and complete the fields.</br>
-        <br>6. Press Print to generate a copy of the form.</br>
-    </section>
-    <!-- printable result outside for print visibility -->
 
+    <section id="faqSection">
+      <p>📌 <strong>FAQ — Price Calculator</strong></p>
+      <p><br />How do I choose the Service Type?<br />
+      Select the service based on the patient’s weight and medical needs:<br />
+      BLS – Patient weighs 1–240 lbs<br />
+      BLS3 – Patient weighs 241–300 lbs<br />
+      BLS4 – Patient weighs 301–400 lbs<br />
+      BLS6 – Patient weighs 401+ lbs<br />
+      ALS – Required when the patient needs a paramedic on board<br />
+      ⚠️ Choose the correct type to ensure appropriate equipment and crew.</p>
+
+      <p>📝 <strong>Form Instructions</strong></p>
+      <p><br />How do I fill out the Call Taking Form?<br />
+      1. Select the Caller Type and enter the caller’s name.<br />
+      2. Choose the appropriate Run Type for the transport.<br />
+      3. Fill out the patient’s name, DOB, and addresses.<br />
+      4. Specify pick-up and appointment times.<br />
+      5. If return transport is needed, enable Return Ride and complete the fields.<br />
+      6. Press Print to generate a copy of the form.</p>
+    </section>
+  </section>
 </main>
 
 <script src="js/ui.js" defer></script>

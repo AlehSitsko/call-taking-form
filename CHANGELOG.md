@@ -6,8 +6,6 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-- Patients page (`patients.html`) under development
-- Email sending logic via `mailto:` + file generation (planned)
 - Insurance info section (low priority)
 - Deployment pipeline and GitHub Pages setup
 
@@ -19,6 +17,9 @@ All notable changes to this project will be documented in this file.
 - 📦 Detailed price breakdown block showing base, mileage, wait time, and total cost
 - 🖨️ Print mode support for pricing: `#priceBreakdownContainer` displays cleanly on print
 - 💡 Visual layout enhancements with `.price-print-block` and improved spacing
+- Email sending feature with pre-filled mailto and `.txt` download
+- Included return ride and price estimate in email content
+- Download filename uses patient last name
 
 ### Changed
 - Price output relocated into calculator pane (under the form)
