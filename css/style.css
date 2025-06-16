@@ -56,7 +56,7 @@ textarea {
     resize: none;
     overflow: hidden;
     min-height: 40px;
-    box-sizing: content-box; /* Required for correct scrollHeight behavior */
+    box-sizing: content-box;
     padding: 8px;
     font-size: 14px;
 }
@@ -88,10 +88,11 @@ textarea {
     font-weight: bold;
 }
 
-/* === Buttons === */
+/* === Button Styles === */
 button {
     padding: 8px 16px;
     margin-top: 10px;
+    margin-bottom: 10px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -104,6 +105,12 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Navigation button spacing */
+a button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 #result {
     margin-top: 15px;
     font-weight: bold;
@@ -113,18 +120,29 @@ button:hover {
 @media (max-width: 768px) {
     .layout {
         flex-direction: column;
+        padding: 10px;
     }
 
     .left-pane,
     .right-pane {
         max-width: 100%;
         flex: 1;
+        padding: 10px;
     }
 
     .right-pane {
         border-left: none;
         border-top: 2px solid #ddd;
         min-height: auto;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    input,
+    textarea {
+        font-size: 16px;
     }
 }
 
@@ -139,17 +157,17 @@ button:hover {
         flex-direction: column;
     }
 
-    /* Don't hide the entire right pane */
+    /* Keep right pane visible */
     .right-pane {
         display: block !important;
     }
 
-    /* Hide everything inside calculator except final result block */
+    /* Hide all calculator fields except result */
     #calculatorFields * {
         display: none;
     }
 
-    /* Show final price block explicitly */
+    /* Display final result block */
     #priceBreakdownContainer {
         display: block !important;
         margin-top: 10px;
@@ -164,6 +182,7 @@ button:hover {
         margin: 4px 0;
     }
 
+    /* Adjust textareas for print */
     textarea {
         resize: none;
         overflow: visible !important;
@@ -173,15 +192,17 @@ button:hover {
         background: transparent;
     }
 
+    /* Hide all buttons when printing */
     button {
         display: none;
     }
 
-    /* Ensure anything tagged as printable is always shown */
+    /* Ensure summary block is always printed */
     .printable-price {
         display: block !important;
     }
-    /* Hide FAQ and instructions block when printing */
+
+    /* Hide FAQ/instruction section on print */
     #faqSection {
         display: none !important;
     }
@@ -202,8 +223,4 @@ button:hover {
     border: none;
     border-top: 1px solid #aaa;
     margin: 8px 0;
-}
-/* === Button Styles === */
-button {
-  margin-bottom: 10px;
 }
