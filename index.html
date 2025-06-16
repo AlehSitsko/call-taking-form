@@ -120,27 +120,32 @@
 
             <button type="submit">Calculate Price</button>
         </form>
-
-        <p id="result"></p>
+            <div id="priceBreakdownContainer" class="printable-price">
+                <p id="result"></p>
+            </div>
+        </div>
     </div>
-
-    <p>📌 FAQ — Price Calculator</p>
-    <p><br>How do I choose the Service Type? Select the service based on the patient’s weight and medical needs:</br> 
-    <br>BLS – Patient weighs 1–240 lbs</br>
-    <br>BLS3 – Patient weighs 241–300 lbs</br>
-    <br>BLS4 – Patient weighs 301–400 lbs</br>
-    <br>BLS6 – Patient weighs 401+ lbs</br>
-    <br>ALS – Required when the patient needs a paramedic on board</br>
-    <br>⚠️ Choose the correct type to ensure appropriate equipment and crew.</br></p>
-    <p>📝 Form Instructions</p>
-    <p><br>How do I fill out the Call Taking Form?</br>
-    <br>1. Select the Caller Type and enter the caller’s name.</br>
-    <br>2. Choose the appropriate Run Type for the transport.</br>
-    <br>3. Fill out the patient’s name, DOB, and addresses.</br>
-    <br>4. Specify pick-up and appointment times.</br>
-    <br>5. If return transport is needed, enable Return Ride and complete the fields.</br>
-    <br>6. Press Print to generate a copy of the form.</br>
+    <!-- FAQ Section -->
+     <section id="faqSection">
+        <p>📌 FAQ — Price Calculator</p>
+        <p><br>How do I choose the Service Type? Select the service based on the patient’s weight and medical needs:</br> 
+        <br>BLS – Patient weighs 1–240 lbs</br>
+        <br>BLS3 – Patient weighs 241–300 lbs</br>
+        <br>BLS4 – Patient weighs 301–400 lbs</br>
+        <br>BLS6 – Patient weighs 401+ lbs</br>
+        <br>ALS – Required when the patient needs a paramedic on board</br>
+        <br>⚠️ Choose the correct type to ensure appropriate equipment and crew.</br></p>
+        <p>📝 Form Instructions</p>
+        <p><br>How do I fill out the Call Taking Form?</br>
+        <br>1. Select the Caller Type and enter the caller’s name.</br>
+        <br>2. Choose the appropriate Run Type for the transport.</br>
+        <br>3. Fill out the patient’s name, DOB, and addresses.</br>
+        <br>4. Specify pick-up and appointment times.</br>
+        <br>5. If return transport is needed, enable Return Ride and complete the fields.</br>
+        <br>6. Press Print to generate a copy of the form.</br>
     </section>
+    <!-- printable result outside for print visibility -->
+
 </main>
 
 <script src="js/ui.js" defer></script>

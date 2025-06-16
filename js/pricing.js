@@ -28,13 +28,19 @@ function displayPrice() {
     const waitingCharge = parseFloat(document.getElementById('waitingTimeCharge')?.value) || 0;
     const resultElement = document.getElementById('result');
 
+    resultElement.classList.add('printable-price');
+
     if (serviceType === 'fixed') {
         if (!isNaN(fixedPrice)) {
             const oneWay = fixedPrice + waitingCharge;
             const total = hasReturnRide ? (fixedPrice * 2) + waitingCharge : oneWay;
-            resultElement.innerHTML = hasReturnRide
-                ? `One-way: $${oneWay.toFixed(2)}<br>Total: $${total.toFixed(2)}`
-                : `Total: $${oneWay.toFixed(2)}`;
+
+            resultElement.innerHTML = `
+                <strong>Price breakdown:</strong><br>
+                Fixed one-way = $${fixedPrice.toFixed(2)}<br>
+                Waiting Time = $${waitingCharge.toFixed(2)}<br>
+                ${hasReturnRide ? `Round Trip Total = $${total.toFixed(2)}` : `Total = $${oneWay.toFixed(2)}`}
+            `;
         } else {
             resultElement.innerText = "Enter a valid fixed price.";
         }
@@ -56,9 +62,17 @@ function displayPrice() {
     const oneWay = base + mileageCost + waitingCharge;
     const total = hasReturnRide ? (base + mileageCost) * 2 + waitingCharge : oneWay;
 
-    resultElement.innerHTML = hasReturnRide
-        ? `One-way: $${oneWay.toFixed(2)}<br>Total: $${total.toFixed(2)}`
-        : `Total: $${oneWay.toFixed(2)}`;
+    resultElement.innerHTML = `
+    <div class="price-print-block">
+        <div><strong>Price breakdown:</strong></div>
+        <div>1 × ${serviceType.toUpperCase()} base = $${base.toFixed(2)}</div>
+        <div>Mileage (${miles} mi × $${milePrice.toFixed(2)}) = $${mileageCost.toFixed(2)}</div>
+        <div>Waiting Time = $${waitingCharge.toFixed(2)}</div>
+        <hr />
+        <div><strong>One-way Total = $${oneWay.toFixed(2)}</strong></div>
+        ${hasReturnRide ? `<div><strong>Round Trip Total = $${total.toFixed(2)}</strong></div>` : ''}
+    </div>
+`;
 }
 
 // Initialize

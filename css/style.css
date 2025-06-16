@@ -6,23 +6,23 @@ body {
 }
 
 .layout {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
 }
 
 .left-pane {
-  flex: 2;
-  max-width: 65%;
+    flex: 2;
+    max-width: 65%;
 }
 
 .right-pane {
-  flex: 1;
-  background-color: #f3f3f3;
-  border-left: 2px solid #ddd;
-  padding: 20px;
-  min-height: 100vh;
+    flex: 1;
+    background-color: #f3f3f3;
+    border-left: 2px solid #ddd;
+    padding: 20px;
+    min-height: 100vh;
 }
 
 h1 {
@@ -139,8 +139,29 @@ button:hover {
         flex-direction: column;
     }
 
+    /* Don't hide the entire right pane */
     .right-pane {
-        display: none; /* Hide calculator section */
+        display: block !important;
+    }
+
+    /* Hide everything inside calculator except final result block */
+    #calculatorFields * {
+        display: none;
+    }
+
+    /* Show final price block explicitly */
+    #priceBreakdownContainer {
+        display: block !important;
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #000;
+        background: white;
+    }
+
+    #priceBreakdownContainer * {
+        display: block;
+        margin: 4px 0;
     }
 
     textarea {
@@ -155,4 +176,30 @@ button:hover {
     button {
         display: none;
     }
+
+    /* Ensure anything tagged as printable is always shown */
+    .printable-price {
+        display: block !important;
+    }
+    /* Hide FAQ and instructions block when printing */
+    #faqSection {
+        display: none !important;
+    }
+}
+
+/* === Price Breakdown Block === */
+.price-print-block {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #444;
+    background-color: #fefefe;
+    max-width: 320px;
+}
+
+.price-print-block hr {
+    border: none;
+    border-top: 1px solid #aaa;
+    margin: 8px 0;
 }
