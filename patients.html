@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patients Database</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/patient.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <div class="left-pane">
+        <a href="index.html">
+            <button style="float: right;">← Back to Main Form</button>
+        </a>
+      <h1>Patient Search</h1>
+
+      <label for="searchLastName">Last Name</label>
+      <input type="text" id="searchLastName" placeholder="Doe" />
+
+      <label for="searchFirstName">First Name</label>
+      <input type="text" id="searchFirstName" placeholder="John" />
+
+      <label for="searchDOB">Date of Birth</label>
+      <input type="date" id="searchDOB" />
+
+      <button id="searchBtn">Search</button>
+      <button id="addNewBtn">+ Add New Patient</button>
+
+      <hr />
+
+      <div id="patientResults"></div>
+    </div>
+
+    <div class="right-pane" id="patientFormPane" style="display:none;">
+      <h2>Edit Patient</h2>
+
+      <form id="patientForm">
+        <label>First Name</label>
+        <input type="text" id="firstName" required />
+
+        <label>Last Name</label>
+        <input type="text" id="lastName" required />
+
+        <label>Date of Birth</label>
+        <input type="date" id="dob" required />
+
+        <label>Phone</label>
+        <input type="text" id="phone" />
+
+        <label>Address</label>
+        <input type="text" id="address" />
+
+        <label>Insurance</label>
+        <input type="text" id="insurance" />
+
+        <label>Notes</label>
+        <textarea id="notes"></textarea>
+
+        <button type="submit">Save</button>
+        <button type="button" id="cancelBtn">Cancel</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
