@@ -7,7 +7,6 @@ function initUI() {
     callerType.addEventListener('change', function () {
       otherCaller.classList.toggle('hidden', this.value !== 'other');
     });
-    // Initial state
     otherCaller.classList.toggle('hidden', callerType.value !== 'other');
   }
 
@@ -18,7 +17,6 @@ function initUI() {
     returnRideCheckbox.addEventListener('change', function () {
       const show = this.checked;
       returnRideSection.classList.toggle('hidden', !show);
-
       if (show) {
         const pickup = document.getElementById('patientAddress')?.value || '';
         const destination = document.getElementById('destinationAddress')?.value || '';
@@ -29,24 +27,20 @@ function initUI() {
         document.getElementById('returnDestinationAddress').value = '';
       }
     });
-    // Initial state
     returnRideSection.classList.toggle('hidden', !returnRideCheckbox.checked);
   }
 
-  // Show/hide Price Calculator fields
+  // Show/hide Price Calculator
   const enableCalcCheckbox = document.getElementById('enableCalculator');
   const calcFields = document.getElementById('calculatorFields');
   if (enableCalcCheckbox && calcFields) {
-    // Initial state
     calcFields.classList.toggle('hidden', !enableCalcCheckbox.checked);
-
-    // Handle checkbox toggle
     enableCalcCheckbox.addEventListener('change', function () {
       calcFields.classList.toggle('hidden', !this.checked);
     });
   }
 
-  // Show/hide Fixed Price input when service type is 'fixed'
+  // Toggle Fixed Price input
   const serviceType = document.getElementById('serviceType');
   const fixedPriceField = document.getElementById('fixedPrice');
   const fixedPriceLabel = document.getElementById('fixedPriceLabel');
@@ -57,12 +51,10 @@ function initUI() {
       fixedPriceLabel.classList.toggle('hidden', !isFixed);
     };
     serviceType.addEventListener('change', toggleFixed);
-    // Initial state
     toggleFixed();
   }
-}
 
-  // Will Call behavior (hides return time if checked)
+  // Will Call logic (must be inside initUI!)
   const willCallCheckbox = document.getElementById('isWillCall');
   const returnTimeInput = document.getElementById('returnPickUpTime');
   if (willCallCheckbox && returnTimeInput) {
@@ -70,7 +62,7 @@ function initUI() {
       returnTimeInput.disabled = this.checked;
       returnTimeInput.classList.toggle('hidden', this.checked);
     });
-    // Initial state
     returnTimeInput.disabled = willCallCheckbox.checked;
     returnTimeInput.classList.toggle('hidden', willCallCheckbox.checked);
   }
+}
