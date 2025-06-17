@@ -1,33 +1,54 @@
-// Entry point for initializing core modules
-// This file also handles actions like sending email and printing the page
-
 document.addEventListener('DOMContentLoaded', function () {
-  initUI();                // UI toggles and visibility
-  initPricing();           // Calculator logic
-  initPatientModule();     // Optional DB integration
-  initTextAreaAutoResize(); // Expands textareas dynamically
+  initUI();                  // UI toggles and visibility
+  initPricing();             // Calculator logic
+  initPatientModule();       // Optional DB integration
+  initTextAreaAutoResize();  // Expands textareas dynamically
 
-  // Print button
   const printBtn = document.getElementById('printBtn');
   if (printBtn) {
     printBtn.addEventListener('click', printPage);
   }
 
-  // Send Email button
   const emailBtn = document.getElementById('sendEmailBtn');
   if (emailBtn) {
     emailBtn.addEventListener('click', sendEmail);
   }
 });
 
-// Triggers browser print dialog
+// Triggers browser print dialog after applying height to all textareas
 function printPage() {
-  window.print();
+  applyTextareaHeights();
+  setTimeout(() => window.print(), 50); // slight delay to ensure layout updates
 }
+
+// Ensure textareas auto-resize visually
+function initTextAreaAutoResize() {
+  const textareas = document.querySelectorAll('textarea');
+  textareas.forEach(textarea => {
+    resize(textarea);
+    textarea.addEventListener('input', () => resize(textarea));
+  });
+
+  function resize(el) {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }
+}
+
+// Apply scrollHeight directly before print
+function applyTextareaHeights() {
+  document.querySelectorAll('textarea').forEach(textarea => {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+    textarea.setAttribute('style', `height: ${textarea.scrollHeight}px;`);
+  });
+}
+
+// beforeprint fallback
+window.addEventListener('beforeprint', applyTextareaHeights);
 
 // Collects form data and triggers email client with .txt export
 function sendEmail() {
-  // Patient Info
   const name = document.getElementById('namePt')?.value || '';
   const lastName = document.getElementById('lastNamePt')?.value || '';
   const dob = document.getElementById('patientDob')?.value || '';
@@ -36,17 +57,14 @@ function sendEmail() {
   const aptTime = document.getElementById('aptTime')?.value || '';
   const special = document.getElementById('specialInstructions')?.value || '';
 
-  // Return Ride
   const hasReturn = document.getElementById('hasReturnRide')?.checked;
   const returnTime = document.getElementById('returnPickUpTime')?.value || '';
   const returnPickup = document.getElementById('returnRidePickUpAddress')?.value || '';
   const returnDest = document.getElementById('returnDestinationAddress')?.value || '';
 
-  // Calculator
   const enableCalc = document.getElementById('enableCalculator')?.checked;
   const resultText = document.getElementById('result')?.textContent || '';
 
-  // Compose body text
   let text = `Patient Info:
 Name: ${name} ${lastName}
 DOB: ${dob}
@@ -71,7 +89,6 @@ Price Estimate:
 ${resultText}`;
   }
 
-  // Create and download .txt file
   const blob = new Blob([text], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
@@ -80,7 +97,6 @@ ${resultText}`;
   link.click();
   URL.revokeObjectURL(url);
 
-  // Open prefilled email
   const subject = encodeURIComponent(`Trip for ${name} ${lastName}`);
   const body = encodeURIComponent(text);
   const mailto = `mailto:?subject=${subject}&body=${body}`;

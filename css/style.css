@@ -153,64 +153,55 @@ a button {
 
 /* === Print Styles === */
 @media print {
-    body {
-        background: white;
-        margin: 0;
-    }
+  body {
+    background: white;
+    margin: 0;
+  }
 
-    .layout {
-        flex-direction: column;
-    }
+  .layout {
+    flex-direction: column;
+  }
 
-    /* Keep right pane visible */
-    .right-pane {
-        display: block !important;
-    }
+  .right-pane {
+    display: block !important;
+  }
 
-    /* Hide all calculator fields except result */
-    #calculatorFields * {
-        display: none;
-    }
+  /* Hide all calculator fields except result */
+  #calculatorFields * {
+    display: none;
+  }
 
-    /* Display final result block */
-    #priceBreakdownContainer {
-        display: block !important;
-        margin-top: 10px;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #000;
-        background: white;
-    }
+  #priceBreakdownContainer {
+    display: block !important;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #000;
+    background: white;
+  }
 
-    #priceBreakdownContainer * {
-        display: block;
-        margin: 4px 0;
-    }
+  #priceBreakdownContainer * {
+    display: block;
+    margin: 4px 0;
+  }
 
-    /* Adjust textareas for print */
-    textarea {
-        resize: none;
-        overflow: visible !important;
-        height: auto !important;
-        border: none;
-        box-shadow: none;
-        background: transparent;
-    }
+  /* ✅ Fix for textarea height during print */
+  textarea {
+    resize: none;
+    overflow: visible !important;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+  }
 
-    /* Hide all buttons when printing */
-    button {
-        display: none;
-    }
+  /* Hide all buttons */
+  button {
+    display: none;
+  }
 
-    /* Ensure summary block is always printed */
-    .printable-price {
-        display: block !important;
-    }
-
-    /* Hide FAQ/instruction section on print */
-    #faqSection {
-        display: none !important;
-    }
+  #faqSection {
+    display: none !important;
+  }
 }
 
 /* === Price Breakdown Block === */
