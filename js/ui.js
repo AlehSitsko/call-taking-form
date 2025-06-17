@@ -66,3 +66,17 @@ function initUI() {
     returnTimeInput.classList.toggle('hidden', willCallCheckbox.checked);
   }
 }
+
+// Automatically resize all textareas to fit content
+function initTextAreaAutoResize() {
+  const textareas = document.querySelectorAll('textarea');
+  textareas.forEach(textarea => {
+    resize(textarea);
+    textarea.addEventListener('input', () => resize(textarea));
+  });
+
+  function resize(el) {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }
+}

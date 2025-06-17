@@ -1,14 +1,16 @@
 // Entry point for initializing core modules
+// This file also handles actions like sending email and printing the page
+
 document.addEventListener('DOMContentLoaded', function () {
-  initUI();                  // Dynamic field toggles
-  initPricing();             // Price calculator logic
-  initPatientModule();       // Placeholder for future DB work
-  initTextAreaAutoResize();  // Textarea auto-height
+  initUI();                // UI toggles and visibility
+  initPricing();           // Calculator logic
+  initPatientModule();     // Optional DB integration
+  initTextAreaAutoResize(); // Expands textareas dynamically
 
   // Print button
   const printBtn = document.getElementById('printBtn');
   if (printBtn) {
-    printBtn.addEventListener('click', () => window.print());
+    printBtn.addEventListener('click', printPage);
   }
 
   // Send Email button
@@ -18,8 +20,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// Email handler
+// Triggers browser print dialog
+function printPage() {
+  window.print();
+}
+
+// Collects form data and triggers email client with .txt export
 function sendEmail() {
+  // Patient Info
   const name = document.getElementById('namePt')?.value || '';
   const lastName = document.getElementById('lastNamePt')?.value || '';
   const dob = document.getElementById('patientDob')?.value || '';
@@ -28,14 +36,17 @@ function sendEmail() {
   const aptTime = document.getElementById('aptTime')?.value || '';
   const special = document.getElementById('specialInstructions')?.value || '';
 
+  // Return Ride
   const hasReturn = document.getElementById('hasReturnRide')?.checked;
   const returnTime = document.getElementById('returnPickUpTime')?.value || '';
   const returnPickup = document.getElementById('returnRidePickUpAddress')?.value || '';
   const returnDest = document.getElementById('returnDestinationAddress')?.value || '';
 
+  // Calculator
   const enableCalc = document.getElementById('enableCalculator')?.checked;
   const resultText = document.getElementById('result')?.textContent || '';
 
+  // Compose body text
   let text = `Patient Info:
 Name: ${name} ${lastName}
 DOB: ${dob}
@@ -60,7 +71,7 @@ Price Estimate:
 ${resultText}`;
   }
 
-  // Save to .txt
+  // Create and download .txt file
   const blob = new Blob([text], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
@@ -69,24 +80,9 @@ ${resultText}`;
   link.click();
   URL.revokeObjectURL(url);
 
-  // Open mailto link
+  // Open prefilled email
   const subject = encodeURIComponent(`Trip for ${name} ${lastName}`);
   const body = encodeURIComponent(text);
-  const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
-  window.open(mailtoLink, '_blank');
-}
-
-// Auto-expand textareas
-function initTextAreaAutoResize() {
-  const textareas = document.querySelectorAll('textarea');
-  textareas.forEach(textarea => {
-    textarea.addEventListener('input', () => {
-      textarea.style.height = 'auto';
-      textarea.style.height = textarea.scrollHeight + 'px';
-    });
-
-    // Initial resize
-    textarea.style.height = 'auto';
-    textarea.style.height = textarea.scrollHeight + 'px';
-  });
+  const mailto = `mailto:?subject=${subject}&body=${body}`;
+  window.open(mailto, '_blank');
 }
