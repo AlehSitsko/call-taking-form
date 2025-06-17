@@ -61,6 +61,11 @@ textarea {
     font-size: 14px;
 }
 
+/* === Hidden Class === */
+.hidden {
+    display: none !important;
+}
+
 /* === Highlighted Sections === */
 .return-ride-checkbox {
     background-color: #e6f0ff;

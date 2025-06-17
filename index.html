@@ -5,16 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Call Taking Form and Price Calculator</title>
   <link rel="stylesheet" href="css/style.css" />
-  <script defer src="js/patient.js"></script>
 </head>
 <body>
 <main class="layout">
+
+  <!-- Left Pane: Main Call Taking Form -->
   <section class="left-pane">
+    <!-- Navigation Button to Patient Database -->
     <a href="patients.html">
-      <button type="button" style="float: right;">🧑‍⚕️ Patients</button>
+      <button type="button" class="float-right">🧑‍⚕️ Patients</button>
     </a>
+
     <h1>Call Taking Form</h1>
 
+    <!-- Caller Info Form -->
     <form onsubmit="event.preventDefault();">
       <label for="callerType">Caller Type:</label>
       <select id="callerType" name="callerType">
@@ -25,31 +29,22 @@
         <option value="private">Private</option>
         <option value="other">Other</option>
       </select>
-      <input type="text" id="otherCallerType" placeholder="Specify Other Caller Type" style="display: none;" />
+      <!-- Only visible when 'Other' is selected -->
+      <input type="text" id="otherCallerType" placeholder="Specify Other Caller Type" class="hidden" />
+
       <input id="callerName" type="text" placeholder="Enter caller's name" />
     </form>
 
-    <form id="runTypeForm">
-      <label for="runType">Run Type:</label>
-      <select name="runType" id="runType">
-        <option value="bls">BLS</option>
-        <option value="bls4">BLS4</option>
-        <option value="bls6">BLS6</option>
-        <option value="als">ALS</option>
-        <option value="emergency">Emergency</option>
-        <option value="privateTransfer">Private Transfer</option>
-      </select>
-    </form>
-
+    <!-- Patient Info Form -->
     <form id="patientInfoForm">
       <label for="namePt">Patient's Name:</label>
       <textarea id="namePt" placeholder="Enter Patient's Name"></textarea>
 
-      <label for="lastNamePT">Patient's Last Name:</label>
-      <textarea id="lastNamePT" placeholder="Enter Patient's Last Name"></textarea>
+      <label for="lastNamePt">Patient's Last Name:</label>
+      <textarea id="lastNamePt" placeholder="Enter Patient's Last Name"></textarea>
 
-      <label for="patientDOB">Patient's DOB:</label>
-      <input id="patientDOB" type="date" placeholder="Enter Patient's DOB" />
+      <label for="patientDob">Patient's DOB:</label>
+      <input id="patientDob" type="date" placeholder="Enter Patient's DOB" />
 
       <label for="patientAddress">Pick Up Address:</label>
       <textarea id="patientAddress" placeholder="Enter Patient's Pick Up Address"></textarea>
@@ -66,12 +61,14 @@
       <label for="specialInstructions">Special Instructions:</label>
       <textarea id="specialInstructions" placeholder="Enter Special Instructions"></textarea>
 
+      <!-- Checkbox to enable return ride section -->
       <div class="return-ride-checkbox">
-        <label for="HasAReturnRide">Has a Return Ride:</label>
-        <input type="checkbox" id="HasAReturnRide" name="HasAReturnRide" />
+        <label for="hasReturnRide">Has a Return Ride:</label>
+        <input type="checkbox" id="hasReturnRide" name="hasReturnRide" />
       </div>
 
-      <div id="returnRideSection" style="display: none;">
+      <!-- Return Ride Details (shown only if checkbox is checked) -->
+      <div id="returnRideSection" class="hidden">
         <div class="will-call-checkbox">
           <input type="checkbox" id="isWillCall" />
           <label for="isWillCall">Will Call (Return time to be determined later)</label>
@@ -86,24 +83,26 @@
         <label for="returnDestinationAddress">Return Destination Address:</label>
         <textarea id="returnDestinationAddress" placeholder="Enter Return Destination Address"></textarea>
 
-        <label for="waitingTimeChargeReturn">Waiting Time Charge ($):</label>
-        <input type="number" id="waitingTimeChargeReturn" name="waitingTimeChargeReturn" step="0.01" />
       </div>
 
-      <button type="button" onclick="printPage()">Print</button>
-      <button id="sendEmailBtn" type="button">Send Email</button>
+      <!-- Action Buttons: Print and Email -->
+      <button type="button" id="printBtn">Print</button>
+      <button type="button" id="sendEmailBtn">Send Email</button>
     </form>
   </section>
 
+  <!-- Right Pane: Price Calculator & FAQ -->
   <section class="right-pane">
     <h1>Price Calculator</h1>
 
+    <!-- Toggle Calculator Visibility -->
     <label>
       <input type="checkbox" id="enableCalculator" />
       Enable Calculator
     </label>
 
-    <div id="calculatorFields" style="display: none;">
+    <!-- Calculator Form -->
+    <div id="calculatorFields" class="hidden">
       <form id="priceCalculatorForm">
         <label for="serviceType">Service Type:</label>
         <select id="serviceType" name="serviceType">
@@ -123,8 +122,8 @@
         <label for="miles">Miles:</label>
         <input type="number" id="miles" name="miles" step="0.1" />
 
-        <label for="fixedPrice" id="fixedPriceLabel" style="display: none;">Enter Fixed Price:</label>
-        <input type="number" id="fixedPrice" name="fixedPrice" style="display: none;" />
+        <label for="fixedPrice" id="fixedPriceLabel" class="hidden">Enter Fixed Price:</label>
+        <input type="number" id="fixedPrice" name="fixedPrice" class="hidden" />
 
         <label for="waitingTimeChargePrice">Waiting Time Charge ($):</label>
         <input type="number" id="waitingTimeChargePrice" name="waitingTimeChargePrice" step="0.01" />
@@ -132,11 +131,13 @@
         <button type="submit">Calculate Price</button>
       </form>
 
+      <!-- Price Output -->
       <div id="priceBreakdownContainer" class="printable-price">
         <p id="result"></p>
       </div>
     </div>
 
+    <!-- FAQ Section for Guidance -->
     <section id="faqSection">
       <p>📌 <strong>FAQ — Price Calculator</strong></p>
       <p><br />How do I choose the Service Type?<br />
@@ -151,18 +152,18 @@
       <p>📝 <strong>Form Instructions</strong></p>
       <p><br />How do I fill out the Call Taking Form?<br />
       1. Select the Caller Type and enter the caller’s name.<br />
-      2. Choose the appropriate Run Type for the transport.<br />
-      3. Fill out the patient’s name, DOB, and addresses.<br />
-      4. Specify pick-up and appointment times.<br />
-      5. If return transport is needed, enable Return Ride and complete the fields.<br />
-      6. Press Print to generate a copy of the form.</p>
+      2. Fill out the patient’s name, DOB, and addresses.<br />
+      3. Specify pick-up and appointment times.<br />
+      4. If return transport is needed, enable Return Ride and complete the fields.<br />
+      5. Enable calculator and calculate price if needed.<br />
+      6. Press Print to generate a copy or Send Email to submit electronically.</p>
     </section>
   </section>
 </main>
 
+<!-- JavaScript Modules -->
 <script src="js/ui.js" defer></script>
 <script src="js/pricing.js" defer></script>
-<script src="js/form.js" defer></script>
 <script src="js/patient.js" defer></script>
 <script src="js/main.js" defer></script>
 </body>

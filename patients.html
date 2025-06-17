@@ -2,79 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patients Database</title>
   <link rel="stylesheet" href="css/style.css" />
   <script defer src="js/patient.js"></script>
 </head>
 <body>
   <div class="layout">
+    <!-- Left Pane: Patient form and search -->
     <div class="left-pane">
-        <a href="index.html">
-            <button style="float: right;">← Back to Main Form</button>
-        </a>
-      <h1>Patient Search</h1>
+      <!-- Back to Main Form -->
+      <a href="index.html">
+        <button type="button">← Back to Main</button>
+      </a>
 
-      <label for="searchLastName">Last Name</label>
-      <input type="text" id="searchLastName" placeholder="Doe" />
+      <h1>Patients</h1>
 
-      <label for="searchFirstName">First Name</label>
-      <input type="text" id="searchFirstName" placeholder="John" />
+      <!-- Search Form -->
+      <form id="searchForm">
+        <label for="searchName">Search by Name:</label>
+        <input type="text" id="searchName" placeholder="First or Last Name" />
+        <label for="searchDOB">Search by DOB:</label>
+        <input type="date" id="searchDOB" />
+        <button type="submit">Search</button>
+      </form>
 
-      <label for="searchDOB">Date of Birth</label>
-      <input type="date" id="searchDOB" />
+      <!-- Search Results Table -->
+      <table id="resultsTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
 
-      <button id="searchBtn">Search</button>
-      <button id="addNewBtn">+ Add New Patient</button>
-
-      <hr />
-
-      <div id="patientResults"></div>
-    </div>
-
-    <div class="right-pane" id="patientFormPane">
-      <h2>Edit Patient</h2>
-
+      <!-- Patient Form for Create/Edit -->
       <form id="patientForm">
-        <label>First Name</label>
-        <input type="text" id="firstName" required />
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" />
 
-        <label>Last Name</label>
-        <input type="text" id="lastName" required />
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" />
 
-        <label>Date of Birth</label>
-        <input type="date" id="dob" required />
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" />
 
-        <label>Phone</label>
+        <label for="phone">Phone:</label>
         <input type="text" id="phone" />
 
-        <label>Address</label>
+        <label for="address">Address:</label>
         <input type="text" id="address" />
 
-        <label>Insurance</label>
+        <label for="insurance">Insurance Company:</label>
         <input type="text" id="insurance" />
 
-        <label>Notes</label>
+        <label for="notes">Notes:</label>
         <textarea id="notes"></textarea>
 
         <button type="submit">Save</button>
-        <button type="button" id="cancelBtn">Cancel</button>
       </form>
+    </div>
 
-      <section class="faq" style="margin-top: 2rem; font-size: 0.95em; line-height: 1.6;">
-        <h3>🛡️ FAQ: Data Privacy and Security</h3>
+    <!-- Right Pane: FAQ Section -->
+    <div class="right-pane">
+      <section id="faqSection">
+        <p>📌 <strong>FAQ — Patient Database</strong></p>
+        <p><br />What can I do here?<br />
+        This page allows you to search, view, and edit patient records. You can:<br />
+        • Search by name and date of birth<br />
+        • Edit details like phone, address, and notes<br />
+        • Link patient data to the main call form</p>
 
-        <p><strong>💬 Does this project handle real patient data?</strong><br>
-        No. This is an <strong>educational project only</strong>. All patient data used in the system is <em>fictional</em> and provided for demonstration purposes only. This tool is not intended for clinical or commercial use.</p>
-
-        <p><strong>🔐 Does this app collect personal information?</strong><br>
-        No. The project does not collect, store, or transmit any personal data. The database is entirely local and not connected to any external servers or cloud services.</p>
-
-        <p><strong>🧠 Why is there a database at all?</strong><br>
-        The database is included strictly for learning purposes — to demonstrate application architecture, API integration, data validation, and local storage. All actions are available only to the project author, locally.</p>
-
-        <p><strong>📄 Is this project HIPAA/GDPR compliant?</strong><br>
-        No, since it does <strong>not process any real personal data</strong>. However, the code and design follow security best practices and can be adapted for compliance in future production versions.</p>
+        <p>📝 <strong>Workflow</strong></p>
+        <p><br />
+        1. Use the search bar to find a patient.<br />
+        2. Click "Edit" to pre-fill the form.<br />
+        3. Modify fields and click "Save" to update.<br />
+        4. New patients can be added manually.<br />
+        5. Integration with main form (future feature).<br />
+        </p>
       </section>
     </div>
   </div>

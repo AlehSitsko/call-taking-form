@@ -1,100 +1,76 @@
-// Toggle fixed price input and disable miles based on service type
-function toggleFixedPriceDisplay() {
-    const serviceType = document.getElementById('serviceType');
-    const fixedLabel = document.getElementById('fixedPriceLabel');
-    const fixedInput = document.getElementById('fixedPrice');
-    const milesInput = document.getElementById('miles');
-
-    serviceType.addEventListener('change', () => {
-        const isFixed = serviceType.value === 'fixed';
-        fixedLabel.style.display = isFixed ? 'inline-block' : 'none';
-        fixedInput.style.display = isFixed ? 'inline-block' : 'none';
-        milesInput.disabled = isFixed;
-    });
-}
-
-// Enable/disable calculator section
-function toggleCalculator() {
-    const enableCheckbox = document.getElementById('enableCalculator');
-    const calculatorSection = document.getElementById('calculatorFields');
-
-    enableCheckbox.addEventListener('change', () => {
-        calculatorSection.style.display = enableCheckbox.checked ? 'block' : 'none';
-    });
-}
-
-// Exclude miles toggle
-function toggleExcludeMiles() {
-    const excludeCheckbox = document.getElementById('excludeMilesCheckbox');
-    const milesInput = document.getElementById('miles');
-
-    excludeCheckbox.addEventListener('change', () => {
-        milesInput.disabled = excludeCheckbox.checked;
-    });
-}
-// Toggle return ride option
-function toggleReturnRide() {
-    const checkbox = document.getElementById('HasAReturnRide');
-    const section = document.getElementById('returnRideSection');
-
-    checkbox.addEventListener('change', () => {
-        const show = checkbox.checked;
-        section.style.display = show ? 'block' : 'none';
-
-        if (show) {
-            const pickup = document.getElementById('patientAddress').value;
-            const destination = document.getElementById('destinationAddress').value;
-
-            document.getElementById('returnRidePickUpAddress').value = destination;
-            document.getElementById('returnDestinationAddress').value = pickup;
-
-            const willCallCheckbox = document.getElementById('isWillCall');
-            const returnTimeField = document.getElementById('returnPickUpTime');
-
-            if (willCallCheckbox && returnTimeField) {
-                willCallCheckbox.addEventListener('change', function () {
-                    returnTimeField.disabled = this.checked;
-                    returnTimeField.style.opacity = this.checked ? '0.5' : '1';
-                });
-            }
-        }
-    });
-}
-
-// toggle the visibility of the "Other" field based on the selected caller type
-function toggleOtherCallerType() {
-    const callerType = document.getElementById('callerType');
-    const otherCallerType = document.getElementById('otherCallerType');
-
-    callerType.addEventListener('change', () => {
-        otherCallerType.style.display = callerType.value === 'other' ? 'inline-block' : 'none';
-    });
-}
-
-// Function for autoresize textareas
-function autoResizeTextArea(textarea) {
-    textarea.style.height = 'auto';
-    textarea.style.height = textarea.scrollHeight + 'px';
-}
-// Attach the autoResizeTextArea function to all textareas
-function initTextAreaAutoResize() {
-    const textareas = document.querySelectorAll('textarea');
-    textareas.forEach(textarea => {
-        textarea.addEventListener('input', () => autoResizeTextArea(textarea));
-        // Initial resize
-        autoResizeTextArea(textarea);
-    });
-}
-// Print the entire page
-function printPage() {
-    window.print();
-}
-
-// Initialize UI behaviors
+// Initialize all UI-related listeners and visibility handlers
 function initUI() {
-    toggleFixedPriceDisplay();
-    toggleCalculator();
-    toggleExcludeMiles();
-    toggleReturnRide();
-    toggleOtherCallerType();
+  // Show/hide 'Other Caller Type' input
+  const callerType = document.getElementById('callerType');
+  const otherCaller = document.getElementById('otherCallerType');
+  if (callerType && otherCaller) {
+    callerType.addEventListener('change', function () {
+      otherCaller.classList.toggle('hidden', this.value !== 'other');
+    });
+    // Initial state
+    otherCaller.classList.toggle('hidden', callerType.value !== 'other');
+  }
+
+  // Show/hide Return Ride section and autofill return addresses
+  const returnRideCheckbox = document.getElementById('hasReturnRide');
+  const returnRideSection = document.getElementById('returnRideSection');
+  if (returnRideCheckbox && returnRideSection) {
+    returnRideCheckbox.addEventListener('change', function () {
+      const show = this.checked;
+      returnRideSection.classList.toggle('hidden', !show);
+
+      if (show) {
+        const pickup = document.getElementById('patientAddress')?.value || '';
+        const destination = document.getElementById('destinationAddress')?.value || '';
+        document.getElementById('returnRidePickUpAddress').value = destination;
+        document.getElementById('returnDestinationAddress').value = pickup;
+      } else {
+        document.getElementById('returnRidePickUpAddress').value = '';
+        document.getElementById('returnDestinationAddress').value = '';
+      }
+    });
+    // Initial state
+    returnRideSection.classList.toggle('hidden', !returnRideCheckbox.checked);
+  }
+
+  // Show/hide Price Calculator fields
+  const enableCalcCheckbox = document.getElementById('enableCalculator');
+  const calcFields = document.getElementById('calculatorFields');
+  if (enableCalcCheckbox && calcFields) {
+    // Initial state
+    calcFields.classList.toggle('hidden', !enableCalcCheckbox.checked);
+
+    // Handle checkbox toggle
+    enableCalcCheckbox.addEventListener('change', function () {
+      calcFields.classList.toggle('hidden', !this.checked);
+    });
+  }
+
+  // Show/hide Fixed Price input when service type is 'fixed'
+  const serviceType = document.getElementById('serviceType');
+  const fixedPriceField = document.getElementById('fixedPrice');
+  const fixedPriceLabel = document.getElementById('fixedPriceLabel');
+  if (serviceType && fixedPriceField && fixedPriceLabel) {
+    const toggleFixed = () => {
+      const isFixed = serviceType.value === 'fixed';
+      fixedPriceField.classList.toggle('hidden', !isFixed);
+      fixedPriceLabel.classList.toggle('hidden', !isFixed);
+    };
+    serviceType.addEventListener('change', toggleFixed);
+    // Initial state
+    toggleFixed();
+  }
 }
+
+  // Will Call behavior (hides return time if checked)
+  const willCallCheckbox = document.getElementById('isWillCall');
+  const returnTimeInput = document.getElementById('returnPickUpTime');
+  if (willCallCheckbox && returnTimeInput) {
+    willCallCheckbox.addEventListener('change', function () {
+      returnTimeInput.disabled = this.checked;
+      returnTimeInput.classList.toggle('hidden', this.checked);
+    });
+    // Initial state
+    returnTimeInput.disabled = willCallCheckbox.checked;
+    returnTimeInput.classList.toggle('hidden', willCallCheckbox.checked);
+  }
