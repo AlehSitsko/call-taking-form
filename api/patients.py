@@ -1,84 +1,93 @@
-from flask import Blueprint, request, jsonify
-from app import db
-from models.patient import Patient
-from datetime import datetime
+from datetime import date
+from flask import Blueprint, request, jsonify, abort
+from app import db                    # only import the global SQLAlchemy()
+from models.patient import Patient    # your ORM model
 
 patients_bp = Blueprint('patients', __name__)
 
 @patients_bp.route('/patients', methods=['GET'])
 def list_patients():
     """
-    GET /api/patients?name=<>&dob=<YYYY-MM-DD>
-    Returns a JSON array of matching patients.
+    GET /api/patients
+    Optional query params:
+      - name:  filter by first_name or last_name (case-insensitive, partial match)
+      - dob:   filter by exact date of birth (YYYY-MM-DD)
+    Returns list of patient dicts.
     """
-    name = request.args.get('name', '').strip()
-    dob_str = request.args.get('dob', '').strip()
+    name = request.args.get('name')
+    dob = request.args.get('dob')
 
     query = Patient.query
-
     if name:
         pattern = f"%{name}%"
         query = query.filter(
-            Patient.first_name.ilike(pattern) |
-            Patient.last_name.ilike(pattern)
+            (Patient.first_name.ilike(pattern)) |
+            (Patient.last_name.ilike(pattern))
         )
-
-    if dob_str:
+    if dob:
         try:
-            dob = datetime.strptime(dob_str, '%Y-%m-%d').date()
-            query = query.filter_by(dob=dob)
+            dob_obj = date.fromisoformat(dob)
         except ValueError:
-            return jsonify({ "error": "Invalid date format. Use YYYY-MM-DD." }), 400
+            abort(400, description="Invalid dob format; expected YYYY-MM-DD")
+        query = query.filter_by(dob=dob_obj)
 
-    results = query.all()
-    return jsonify([p.to_dict() for p in results]), 200
+    patients = query.all()
+    return jsonify([p.to_dict() for p in patients])
+
 
 @patients_bp.route('/patient', methods=['POST'])
 def create_patient():
     """
     POST /api/patient
-    Body JSON: { first_name, last_name, dob(YYYY-MM-DD), [phone, address, insurance, notes] }
-    Returns { "id": newId }.
+    Body JSON must include first_name, last_name, dob.
+    Returns { "id": new_patient_id } on success.
     """
     data = request.get_json() or {}
-    try:
-        dob = datetime.strptime(data['dob'], '%Y-%m-%d').date()
-    except (KeyError, ValueError):
-        return jsonify({ "error": "Missing or invalid 'dob'. Use YYYY-MM-DD." }), 400
+    for field in ('first_name', 'last_name', 'dob'):
+        if field not in data:
+            abort(400, description=f"Missing field: {field}")
 
-    p = Patient(
-        first_name=data.get('first_name','').strip(),
-        last_name=data.get('last_name','').strip(),
-        dob=dob,
+    # parse dob
+    try:
+        dob_obj = date.fromisoformat(data['dob'])
+    except ValueError:
+        abort(400, description="Invalid dob format; expected YYYY-MM-DD")
+
+    patient = Patient(
+        first_name=data['first_name'],
+        last_name=data['last_name'],
+        dob=dob_obj,
         phone=data.get('phone'),
         address=data.get('address'),
         insurance=data.get('insurance'),
-        notes=data.get('notes'),
+        notes=data.get('notes')
     )
-    db.session.add(p)
+    db.session.add(patient)
     db.session.commit()
-    return jsonify({ "id": p.id }), 201
+
+    return jsonify({'id': patient.id}), 201
+
 
 @patients_bp.route('/patient/<int:id>', methods=['PUT'])
 def update_patient(id):
     """
     PUT /api/patient/<id>
-    Body JSON: any of first_name, last_name, dob, phone, address, insurance, notes
-    Returns 204 No Content.
+    Body JSON may include any of: first_name, last_name, dob, phone, address, insurance, notes.
+    Returns 204 No Content on success.
     """
     patient = Patient.query.get_or_404(id)
     data = request.get_json() or {}
 
-    for field in ('first_name','last_name','phone','address','insurance','notes'):
-        if field in data:
-            val = data[field]
-            setattr(patient, field, val.strip() if isinstance(val, str) else val)
-
     if 'dob' in data:
         try:
-            patient.dob = datetime.strptime(data['dob'], '%Y-%m-%d').date()
+            patient.dob = date.fromisoformat(data['dob'])
         except ValueError:
-            return jsonify({ "error": "Invalid 'dob'. Use YYYY-MM-DD." }), 400
+            abort(400, description="Invalid dob format; expected YYYY-MM-DD")
+
+    # update other fields if present
+    for attr in ('first_name', 'last_name', 'phone', 'address', 'insurance', 'notes'):
+        if attr in data:
+            setattr(patient, attr, data[attr])
 
     db.session.commit()
     return '', 204
