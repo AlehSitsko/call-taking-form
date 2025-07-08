@@ -1,47 +1,41 @@
+import os
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
-# Create a global SQLAlchemy object for database operations
+# 1) Single SQLAlchemy instance
 db = SQLAlchemy()
 
 def create_app():
-    # Initialize the Flask application
+    # 2) Flask factory
     app = Flask(__name__, instance_relative_config=True)
+    os.makedirs(app.instance_path, exist_ok=True)
 
-    # Configure the app: secret key and database URI
+    # 3) Configure SQLite
+    db_path = os.path.join(app.instance_path, 'database.db')
     app.config.from_mapping(
-        SECRET_KEY='dev',  # Replace with a secure key in production
-        SQLALCHEMY_DATABASE_URI='sqlite:///instance/database.db',
-        SQLALCHEMY_TRACK_MODIFICATIONS=False,  # Disable event system to save memory
+        SECRET_KEY='dev',
+        SQLALCHEMY_DATABASE_URI=f"sqlite:///{db_path}",
+        SQLALCHEMY_TRACK_MODIFICATIONS=False,
     )
 
-    # Bind SQLAlchemy to the app
+    # 4) Init extensions
     db.init_app(app)
-
-    # Enable CORS so that the frontend can make API requests
     CORS(app)
 
-    # Register blueprints and create database tables inside the app context
+    # 5) Register blueprints & create tables
     with app.app_context():
-        # Import the patients blueprint and patient model so Flask knows about them
         from api.patients import patients_bp
-        from models.patient import Patient
-
-        # Register the patients blueprint under the `/api` URL prefix
         app.register_blueprint(patients_bp, url_prefix='/api')
-
-        # Create any database tables that don't yet exist
         db.create_all()
 
     @app.route('/')
     def index():
-        # A simple health-check endpoint
         return "Welcome to the Flask App!"
 
     return app
 
+# 6) Only run when executed directly
 if __name__ == '__main__':
-    # Run the application in debug mode for local development
     app = create_app()
     app.run(debug=True)
